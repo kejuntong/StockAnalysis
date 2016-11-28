@@ -148,19 +148,33 @@ public class StockDetailActivity extends Activity {
         }
 
         // set sok text
+        BigDecimal sokValue = null;
         if (sokList.size() > 0){
-            sokText.setText(String.valueOf(sokList.get(0).multiply(BigDecimal.valueOf(100))) + "%");
+            sokValue = sokList.get(0).multiply(BigDecimal.valueOf(100));
+            sokText.setText(String.valueOf(sokValue) + "%");
         } else {
             sokText.setText("N/A");
         }
 
         // set sod text
+        BigDecimal sodValue = null;
         if (sokList.size() >= 3 ){
             BigDecimal totalSok = BigDecimal.ZERO;
             for (int i=0; i<3; i++){
                 totalSok = totalSok.add(sokList.get(0));
             }
-            sodText.setText(String.valueOf(totalSok.divide(BigDecimal.valueOf(3), BigDecimal.ROUND_CEILING)));
+            sodValue = totalSok.divide(BigDecimal.valueOf(3), BigDecimal.ROUND_CEILING);
+            sodText.setText(String.valueOf(sodValue.multiply(BigDecimal.valueOf(100))) + "%");
+        }
+
+        // williams
+        BigDecimal williams = null;
+        if (currentList.size() >= 14){
+            williams = currentList.get(0).getClose().subtract(getHighestInPastFourteenDays(0)).
+                    divide(getHighestInPastFourteenDays(0).subtract(getLowestInPastFourteenDays(0)), BigDecimal.ROUND_CEILING);
+            williamsRText.setText(String.valueOf(williams.multiply(BigDecimal.valueOf(100))) + "%");
+        } else {
+            williamsRText.setText("N/A");
         }
 
     }
