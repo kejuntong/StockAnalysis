@@ -161,7 +161,7 @@ public class StockDetailActivity extends Activity {
         if (sokList.size() >= 3 ){
             BigDecimal totalSok = BigDecimal.ZERO;
             for (int i=0; i<3; i++){
-                totalSok = totalSok.add(sokList.get(0));
+                totalSok = totalSok.add(sokList.get(i));
             }
             sodValue = totalSok.divide(BigDecimal.valueOf(3), BigDecimal.ROUND_CEILING);
             sodText.setText(String.valueOf(sodValue.multiply(BigDecimal.valueOf(100))) + "%");

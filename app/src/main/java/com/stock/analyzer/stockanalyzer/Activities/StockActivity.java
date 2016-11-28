@@ -22,7 +22,7 @@ import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
 
-public class HomeActivity extends Activity {
+public class StockActivity extends Activity {
 
     RecyclerView mRecyclerView;
     StockHistoryAdapter mAdapter;
@@ -34,7 +34,7 @@ public class HomeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_stock);
 
         // init recycler view
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -84,7 +84,7 @@ public class HomeActivity extends Activity {
                     e.printStackTrace();
                 }
 
-                new Handler(HomeActivity.this.getMainLooper()).post(new Runnable() {
+                new Handler(StockActivity.this.getMainLooper()).post(new Runnable() {
                     @Override
                     public void run() {
                         mAdapter.notifyDataSetChanged();
