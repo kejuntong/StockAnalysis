@@ -1,12 +1,15 @@
 package com.stock.analyzer.stockanalyzer.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.stock.analyzer.stockanalyzer.Activities.StockActivity;
+import com.stock.analyzer.stockanalyzer.Activities.StockSelectActivity;
 import com.stock.analyzer.stockanalyzer.Models.Company;
 import com.stock.analyzer.stockanalyzer.R;
 
@@ -61,6 +64,16 @@ public class StockSelectAdapter extends
 
         Company item = itemList.get(position);
         holder.symbolAndNameText.setText(item.getSymbol() + ", " + item.getName());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, StockActivity.class);
+                intent.putExtra("symbol", itemList.get(position).getSymbol());
+                intent.putExtra("name", itemList.get(position).getName());
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override

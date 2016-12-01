@@ -68,7 +68,7 @@ public class StockSelectActivity extends Activity {
         CSVReader csvReader = null;
         AssetManager assetManager = getAssets();
         try {
-            csvStream = assetManager.open("company_list.csv");
+            csvStream = assetManager.open("stock_list.csv");
             csvStreamReader = new InputStreamReader(csvStream);
             csvReader = new CSVReader(csvStreamReader, ',');
 
@@ -126,9 +126,11 @@ public class StockSelectActivity extends Activity {
     private void searchCompany(String keyWord){
 
         searchResultList.clear();
+        mAdapter.notifyDataSetChanged();
 
         for (Company company : allCompanyList) {
-            if (company.getSymbol().toUpperCase().contains(keyWord.toUpperCase())) {
+            if (company.getSymbol().toUpperCase().contains(keyWord.toUpperCase()) ||
+                    company.getName().toUpperCase().contains(keyWord.toUpperCase() )) {
                 searchResultList.add(company);
             }
         }

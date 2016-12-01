@@ -11,6 +11,14 @@
         android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
         android:text=""
-        android:textSize="20dp"/>
+        android:textSize="17dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparent_black_percent_15"/>
 
 </RelativeLayout>

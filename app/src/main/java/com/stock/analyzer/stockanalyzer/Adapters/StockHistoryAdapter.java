@@ -15,6 +15,7 @@ import com.stock.analyzer.stockanalyzer.UtilClasses.Global;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -50,6 +51,7 @@ public class StockHistoryAdapter extends
         TextView highPriceText;
         TextView lowPriceText;
         TextView closePriceText;
+        TextView volumeText;
     }
 
     @Override
@@ -63,6 +65,7 @@ public class StockHistoryAdapter extends
         viewHolder.highPriceText = (TextView) view.findViewById(R.id.high_price);
         viewHolder.lowPriceText = (TextView) view.findViewById(R.id.low_price);
         viewHolder.closePriceText = (TextView) view.findViewById(R.id.close_price);
+        viewHolder.volumeText = (TextView) view.findViewById(R.id.volume);
 
         return viewHolder;
     }
@@ -80,16 +83,33 @@ public class StockHistoryAdapter extends
         holder.dateText.setText(strDate);
 
         // open price
-        holder.openPriceText.setText(String.valueOf(item.getOpen().setScale(6, BigDecimal.ROUND_CEILING)));
+        BigDecimal openPrice = item.getOpen();
+//                .setScale(6, BigDecimal.ROUND_CEILING);
+        holder.openPriceText.setText(String.valueOf(openPrice));
 
         // high price
-        holder.highPriceText.setText(String.valueOf(item.getHigh().setScale(6, BigDecimal.ROUND_CEILING)));
+        holder.highPriceText.setText(String.valueOf(item.getHigh()));
+//                .setScale(6, BigDecimal.ROUND_CEILING)));
 
         // low price
-        holder.lowPriceText.setText(String.valueOf(item.getLow().setScale(6, BigDecimal.ROUND_CEILING)));
+        holder.lowPriceText.setText(String.valueOf(item.getLow()));
+//                .setScale(6, BigDecimal.ROUND_CEILING)));
 
         // close price
-        holder.closePriceText.setText(String.valueOf(item.getClose().setScale(6, BigDecimal.ROUND_CEILING)));
+        BigDecimal closePrice = item.getClose();
+//                .setScale(6, BigDecimal.ROUND_CEILING);
+        holder.closePriceText.setText(String.valueOf(closePrice));
+
+        // volume
+        holder.volumeText.setText(NumberFormat.getNumberInstance(Locale.US).format(item.getVolume()));
+
+        if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) < 0){
+            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_red);
+        } else if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) > 0) {
+            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_green);
+        } else {
+            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background);
+        }
 
         // go to detail
         holder.itemView.setOnClickListener(new View.OnClickListener() {

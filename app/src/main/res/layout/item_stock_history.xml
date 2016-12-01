@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:background="@drawable/selectable_row_background">
+    android:layout_height="60dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,10 +12,11 @@
             android:id="@+id/date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:text="Dec.1\n2016"
+            android:textStyle="italic"
             android:textSize="13dp"/>
 
         <LinearLayout
@@ -24,23 +24,25 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/date"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="15dp"
+            android:layout_centerVertical="true"
             android:orientation="vertical"
             android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="Open:"
-                android:textSize="16dp"/>
+                android:textSize="13dp"/>
 
             <TextView
                 android:id="@+id/open_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:maxWidth="80dp"
+                android:maxLength="5"
                 android:text="10.00000"
                 android:textSize="13dp"/>
 
@@ -50,24 +52,26 @@
             android:id="@+id/high_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/open_container"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="15dp"
             android:orientation="vertical"
             android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="High:"
-                android:textSize="16dp"/>
+                android:textSize="13dp"/>
 
             <TextView
                 android:id="@+id/high_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:maxWidth="80dp"
+                android:maxLength="5"
                 android:text="10.00000"
                 android:textSize="13dp"/>
 
@@ -77,24 +81,26 @@
             android:id="@+id/low_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/high_container"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="15dp"
             android:orientation="vertical"
             android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="Low:"
-                android:textSize="16dp"/>
+                android:textSize="13dp"/>
 
             <TextView
                 android:id="@+id/low_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
-                android:maxWidth="80dp"
+                android:maxLength="5"
                 android:text="10.00000"
                 android:textSize="13dp"/>
 
@@ -104,23 +110,54 @@
             android:id="@+id/close_container"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/low_container"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="15dp"
             android:orientation="vertical"
             android:layout_weight="1">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="Close:"
-                android:textSize="16dp"/>
+                android:textSize="13dp"/>
 
             <TextView
                 android:id="@+id/close_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLength="5"
+                android:maxWidth="80dp"
+                android:text="10.00000"
+                android:textSize="13dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/volume_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/close_container"
+            android:layout_marginLeft="15dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:singleLine="true"
+                android:text="Volume:"
+                android:textSize="13dp"/>
+
+            <TextView
+                android:id="@+id/volume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLength="15"
                 android:maxWidth="80dp"
                 android:text="10.00000"
                 android:textSize="13dp"/>
@@ -128,5 +165,13 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/transparent_black_percent_15"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
 </RelativeLayout>

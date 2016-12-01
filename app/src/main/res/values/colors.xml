@@ -153,6 +153,9 @@
     <color name="holo_blue_dark">#0099cc</color>
     <color name="holo_blue_bright">#00ddff</color>
 
+    <color name="trans_green_30">#4D008000</color>
+    <color name="trans_red_30">#4DFF0000</color>
+
     <!-- Black Transparent -->
     <color name="transparent_black_percent_5">#0D000000</color>
     <color name="transparent_black_percent_10">#1A000000</color>
