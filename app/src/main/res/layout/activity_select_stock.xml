@@ -7,7 +7,7 @@
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/transparent_black_percent_15"
+        android:background="@color/darkgreen"
         android:clickable="true">
 
         <EditText
@@ -17,14 +17,15 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
-            android:background="@drawable/edit_text_underline_black"
-            android:hint="Enter a stock symbol"
-            android:inputType="text|textCapCharacters"
-            android:digits="0123456789QWERTYUIOPASDFGHJKLZXCVBNMqwertzuiopasdfghjklyxcvbnm "
+            android:background="@drawable/edit_text_underline_yellow"
+            android:hint="Enter a company name or a stock symbol"
+            android:textColorHint="@color/white"
+            android:inputType="textCapCharacters"
+            android:imeOptions="actionDone"
             android:text=""
-            android:textSize="15dp"
-            android:textColor="@color/black"
-            android:textCursorDrawable="@drawable/text_cursor_blue" />
+            android:textSize="17dp"
+            android:textColor="@color/white"
+            android:textCursorDrawable="@drawable/text_cursor_yellow" />
 
         <ImageButton
             android:id="@+id/cancel_button"

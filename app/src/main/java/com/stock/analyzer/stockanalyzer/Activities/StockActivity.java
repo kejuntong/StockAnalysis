@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.stock.analyzer.stockanalyzer.Adapters.StockHistoryAdapter;
 import com.stock.analyzer.stockanalyzer.R;
@@ -24,17 +25,27 @@ import yahoofinance.histquotes.Interval;
 
 public class StockActivity extends Activity {
 
+    TextView titleText;
+
     RecyclerView mRecyclerView;
     StockHistoryAdapter mAdapter;
     ArrayList<HistoricalQuote> historyList;
 
-    Button okButton;
-    EditText enterStockText;
+//    Button okButton;
+//    EditText enterStockText;
+
+    String stockSymbol;
+    String stockName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock);
+
+        stockSymbol = getIntent().getExtras().getString("symbol");
+        stockName = getIntent().getExtras().getString("name");
+        titleText = (TextView) findViewById(R.id.title_text);
+        titleText.setText(stockSymbol + ", " + stockName);
 
         // init recycler view
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -44,19 +55,7 @@ public class StockActivity extends Activity {
         mAdapter = new StockHistoryAdapter(this, historyList);
         mRecyclerView.setAdapter(mAdapter);
 
-        // init button and edit text
-        enterStockText = (EditText) findViewById(R.id.enter_stock_text);
-        okButton = (Button) findViewById(R.id.button_ok);
-        okButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String stockId = enterStockText.getText().toString().trim();
-                if (!stockId.isEmpty()) {
-                    pullData(stockId);
-                }
-            }
-        });
-
+        pullData(stockSymbol);
 
     }
 
