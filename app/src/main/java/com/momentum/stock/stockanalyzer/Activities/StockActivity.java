@@ -1,4 +1,4 @@
-package com.stock.analyzer.stockanalyzer.Activities;
+package com.momentum.stock.stockanalyzer.Activities;
 
 import android.app.Activity;
 import android.os.Handler;
@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
-import com.stock.analyzer.stockanalyzer.Adapters.StockHistoryAdapter;
-import com.stock.analyzer.stockanalyzer.R;
+import com.momentum.stock.stockanalyzer.Adapters.StockHistoryAdapter;
+import com.momentum.stock.stockanalyzer.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,9 +29,6 @@ public class StockActivity extends Activity {
     StockHistoryAdapter mAdapter;
     ArrayList<HistoricalQuote> historyList;
 
-//    Button okButton;
-//    EditText enterStockText;
-
     String stockSymbol;
     String stockName;
 
@@ -46,6 +41,13 @@ public class StockActivity extends Activity {
         stockName = getIntent().getExtras().getString("name");
         titleText = (TextView) findViewById(R.id.title_text);
         titleText.setText(stockSymbol + ", " + stockName);
+
+        findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         // init recycler view
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.stock.analyzer.stockanalyzer">
+    package="com.momentum.stock.stockanalyzer">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.SplashScreenActivity">
+        <activity android:name="com.momentum.stock.stockanalyzer.Activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,11 +18,11 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Activities.StockSelectActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.momentum.stock.stockanalyzer.Activities.StockSelectActivity" android:screenOrientation="portrait"/>
 
-        <activity android:name=".Activities.StockActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.momentum.stock.stockanalyzer.Activities.StockActivity" android:screenOrientation="portrait"/>
 
-        <activity android:name=".Activities.StockDetailActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.momentum.stock.stockanalyzer.Activities.StockDetailActivity" android:screenOrientation="portrait"/>
 
     </application>
 

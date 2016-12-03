@@ -1,11 +1,12 @@
-package com.stock.analyzer.stockanalyzer.Activities;
+package com.momentum.stock.stockanalyzer.Activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
-import com.stock.analyzer.stockanalyzer.R;
-import com.stock.analyzer.stockanalyzer.UtilClasses.Global;
+import com.momentum.stock.stockanalyzer.R;
+import com.momentum.stock.stockanalyzer.UtilClasses.Global;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -40,6 +41,13 @@ public class StockDetailActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stock_detail);
+
+        findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         currentList = Global.getInstance().currentList;
 

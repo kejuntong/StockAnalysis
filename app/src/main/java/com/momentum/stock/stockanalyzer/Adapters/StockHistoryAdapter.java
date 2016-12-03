@@ -1,4 +1,4 @@
-package com.stock.analyzer.stockanalyzer.Adapters;
+package com.momentum.stock.stockanalyzer.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,12 +6,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.stock.analyzer.stockanalyzer.Activities.StockDetailActivity;
-import com.stock.analyzer.stockanalyzer.R;
-import com.stock.analyzer.stockanalyzer.UtilClasses.Global;
+import com.momentum.stock.stockanalyzer.Activities.StockDetailActivity;
+import com.momentum.stock.stockanalyzer.R;
+import com.momentum.stock.stockanalyzer.UtilClasses.Global;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;

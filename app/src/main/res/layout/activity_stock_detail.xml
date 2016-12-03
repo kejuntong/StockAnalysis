@@ -10,13 +10,13 @@
         android:background="@color/darkgreen">
 
         <ImageButton
-            android:id="@+id/menu_button"
+            android:id="@+id/back_button"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:background="@color/transparent"
-            android:src="@drawable/selectable_menu_button"
+            android:src="@drawable/selectable_back_button"
             android:scaleType="centerInside"
-            android:padding="10dp"/>
+            android:padding="12dp"/>
 
         <TextView
             android:id="@+id/title_text"
@@ -255,5 +255,19 @@
         </LinearLayout>
 
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/title_bar">
+
+        <ProgressBar
+            android:id="@+id/progres_bar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

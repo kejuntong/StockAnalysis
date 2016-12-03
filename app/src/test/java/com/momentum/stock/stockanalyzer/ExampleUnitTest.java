@@ -1,4 +1,4 @@
-package com.stock.analyzer.stockanalyzer;
+package com.momentum.stock.stockanalyzer;
 
 import org.junit.Test;
 

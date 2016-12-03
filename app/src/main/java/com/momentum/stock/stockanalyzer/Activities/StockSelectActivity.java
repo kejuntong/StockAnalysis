@@ -1,4 +1,4 @@
-package com.stock.analyzer.stockanalyzer.Activities;
+package com.momentum.stock.stockanalyzer.Activities;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
@@ -12,9 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.opencsv.CSVReader;
-import com.stock.analyzer.stockanalyzer.Adapters.StockSelectAdapter;
-import com.stock.analyzer.stockanalyzer.Models.Company;
-import com.stock.analyzer.stockanalyzer.R;
+import com.momentum.stock.stockanalyzer.Adapters.StockSelectAdapter;
+import com.momentum.stock.stockanalyzer.Models.Company;
+import com.momentum.stock.stockanalyzer.R;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -51,6 +51,13 @@ public class StockSelectActivity extends Activity {
     private void initViews(){
         searchText = (EditText) findViewById(R.id.search_text);
         cancelButton = (ImageButton) findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                searchText.setText("");
+                cancelButton.setVisibility(View.GONE);
+            }
+        });
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mRecyclerView.setVerticalScrollBarEnabled(true);

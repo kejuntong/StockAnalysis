@@ -1,4 +1,4 @@
-package com.stock.analyzer.stockanalyzer.Models;
+package com.momentum.stock.stockanalyzer.Models;
 
 /**
  * Created by kevintong on 16-11-28.

@@ -10,20 +10,24 @@
         android:background="@color/darkgreen">
 
         <ImageButton
-            android:id="@+id/menu_button"
+            android:id="@+id/back_button"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:background="@color/transparent"
-            android:src="@drawable/selectable_menu_button"
+            android:src="@drawable/selectable_back_button"
             android:scaleType="centerInside"
-            android:padding="10dp"/>
+            android:padding="12dp"/>
 
-        <TextView
+        <me.grantland.widget.AutofitTextView
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
             android:layout_centerInParent="true"
-            android:text="StockAnalyzer"
+            android:text="stock name"
+            android:textAllCaps="true"
             android:textColor="@color/white"
             android:fontFamily="sans-serif-medium"
             android:textStyle="bold"

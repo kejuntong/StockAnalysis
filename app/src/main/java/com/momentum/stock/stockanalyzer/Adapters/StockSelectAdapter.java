@@ -1,4 +1,4 @@
-package com.stock.analyzer.stockanalyzer.Adapters;
+package com.momentum.stock.stockanalyzer.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,10 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.stock.analyzer.stockanalyzer.Activities.StockActivity;
-import com.stock.analyzer.stockanalyzer.Activities.StockSelectActivity;
-import com.stock.analyzer.stockanalyzer.Models.Company;
-import com.stock.analyzer.stockanalyzer.R;
+import com.momentum.stock.stockanalyzer.Activities.StockActivity;
+import com.momentum.stock.stockanalyzer.Models.Company;
+import com.momentum.stock.stockanalyzer.R;
 
 import java.util.ArrayList;
 

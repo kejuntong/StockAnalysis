@@ -1,4 +1,4 @@
-package com.stock.analyzer.stockanalyzer.UtilClasses;
+package com.momentum.stock.stockanalyzer.UtilClasses;
 
 import java.util.ArrayList;
 import java.util.List;
