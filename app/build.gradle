@@ -32,4 +32,5 @@ dependencies {
     compile 'com.github.ViksaaSkool:AwesomeSplash:v1.0.0'
     compile 'com.opencsv:opencsv:3.7'
     compile 'me.grantland:autofittextview:0.2.+'
+    compile 'com.afollestad.material-dialogs:core:0.9.1.0'
 }

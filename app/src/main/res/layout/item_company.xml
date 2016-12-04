@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="@drawable/selectable_row_background">
+    android:background="@drawable/selectable_row_background_black">
 
     <TextView
         android:id="@+id/symbol_and_name"
@@ -11,7 +11,7 @@
         android:layout_marginLeft="10dp"
         android:layout_centerVertical="true"
         android:text=""
-        android:textColor="@color/black"
+        android:textColor="@color/holo_blue_bright"
         android:textSize="17dp"/>
 
     <RelativeLayout
@@ -20,6 +20,6 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_alignParentBottom="true"
-        android:background="@color/transparent_black_percent_15"/>
+        android:background="@color/transparent_white_percent_15"/>
 
 </RelativeLayout>

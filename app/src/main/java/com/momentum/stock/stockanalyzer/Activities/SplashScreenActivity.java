@@ -16,7 +16,7 @@ public class SplashScreenActivity extends AwesomeSplash {
     @Override
     public void initSplash(ConfigSplash configSplash) {
         //Customize Circular Reveal
-        configSplash.setBackgroundColor(R.color.darkgreen); //any color you want form colors.xml
+        configSplash.setBackgroundColor(R.color.black); //any color you want form colors.xml
         configSplash.setAnimCircularRevealDuration(1000); //int ms
         configSplash.setRevealFlagX(Flags.REVEAL_RIGHT);  //or Flags.REVEAL_LEFT
         configSplash.setRevealFlagY(Flags.REVEAL_BOTTOM); //or Flags.REVEAL_TOP
@@ -30,8 +30,8 @@ public class SplashScreenActivity extends AwesomeSplash {
 
 
         //Customize Title
-        configSplash.setTitleSplash("Stock Momentum");
-        configSplash.setTitleTextColor(R.color.gold);
+        configSplash.setTitleSplash("StockMomentum");
+        configSplash.setTitleTextColor(R.color.white);
         configSplash.setTitleTextSize(40f); //float value
         configSplash.setAnimTitleDuration(2000);
         configSplash.setAnimTitleTechnique(Techniques.FlipInX);

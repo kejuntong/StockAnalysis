@@ -3,7 +3,7 @@
     <item android:state_pressed="true">
         <shape android:shape="rectangle"  >
             <solid
-                android:color="@color/transparent_black_percent_10" />
+                android:color="@color/transparent_white_percent_15" />
         </shape>
     </item>
 

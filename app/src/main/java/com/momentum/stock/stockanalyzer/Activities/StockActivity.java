@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.momentum.stock.stockanalyzer.Adapters.StockHistoryAdapter;
 import com.momentum.stock.stockanalyzer.R;
@@ -81,16 +82,24 @@ public class StockActivity extends Activity {
                     for (HistoricalQuote item : list){
                         historyList.add(item);
                     }
+
+                    new Handler(StockActivity.this.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            mAdapter.notifyDataSetChanged();
+                            findViewById(R.id.loading_layer).setVisibility(View.GONE);
+                        }
+                    });
+
                 } catch (IOException e) {
                     e.printStackTrace();
+                    new Handler(StockActivity.this.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(StockActivity.this, "shit no data!!", Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
-
-                new Handler(StockActivity.this.getMainLooper()).post(new Runnable() {
-                    @Override
-                    public void run() {
-                        mAdapter.notifyDataSetChanged();
-                    }
-                });
 
             }
         };

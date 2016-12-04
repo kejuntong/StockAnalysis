@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
 
     <RelativeLayout
         android:id="@+id/title_bar"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/darkgreen"
+        android:background="@color/black"
         android:clickable="true">
 
         <EditText
@@ -17,7 +18,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_centerVertical="true"
-            android:background="@drawable/edit_text_underline_yellow"
+            android:background="@drawable/edit_text_underline_white"
             android:hint="Enter a company name or a stock symbol"
             android:textColorHint="@color/transparent_white_percent_50"
             android:inputType="textCapCharacters"
@@ -25,7 +26,7 @@
             android:text=""
             android:textSize="17dp"
             android:textColor="@color/white"
-            android:textCursorDrawable="@drawable/text_cursor_yellow" />
+            android:textCursorDrawable="@drawable/text_cursor_white" />
 
         <ImageButton
             android:id="@+id/cancel_button"

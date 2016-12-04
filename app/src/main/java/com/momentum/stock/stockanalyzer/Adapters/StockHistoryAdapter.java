@@ -107,7 +107,7 @@ public class StockHistoryAdapter extends
         } else if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) > 0) {
             holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_green);
         } else {
-            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background);
+            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_white);
         }
 
         // go to detail
