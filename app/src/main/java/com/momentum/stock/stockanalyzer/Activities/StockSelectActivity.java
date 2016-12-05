@@ -1,6 +1,7 @@
 package com.momentum.stock.stockanalyzer.Activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,7 @@ public class StockSelectActivity extends Activity {
     ArrayList<Company> allCompanyList;
     ArrayList<Company> searchResultList;
 
+    ImageButton wishListButton;
     EditText searchText;
     ImageButton cancelButton;
 
@@ -49,6 +51,13 @@ public class StockSelectActivity extends Activity {
     }
 
     private void initViews(){
+        wishListButton = (ImageButton) findViewById(R.id.wish_list_button);
+        wishListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(StockSelectActivity.this, WishListActivity.class));
+            }
+        });
         searchText = (EditText) findViewById(R.id.search_text);
         cancelButton = (ImageButton) findViewById(R.id.cancel_button);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -75,18 +84,18 @@ public class StockSelectActivity extends Activity {
         CSVReader csvReader = null;
         AssetManager assetManager = getAssets();
         try {
-            csvStream = assetManager.open("stock_list.csv");
+            csvStream = assetManager.open("stock_list_1.csv");
             csvStreamReader = new InputStreamReader(csvStream);
             csvReader = new CSVReader(csvStreamReader, ',');
 
             String[] line;
             // throw away the header
-            csvReader.readNext();
+//            csvReader.readNext();
 
             while ((line = csvReader.readNext()) != null) {
-                Company school = new Company(line[0], line[1]);
-                allCompanyList.add(school);
-                searchResultList.add(school);
+                Company company = new Company(line[0], line[1]);
+                allCompanyList.add(company);
+                searchResultList.add(company);
             }
         } catch (IOException e) {
             e.printStackTrace();

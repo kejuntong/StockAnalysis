@@ -19,23 +19,12 @@
             android:scaleType="centerInside"
             android:padding="12dp"/>
 
-        <Button
-            android:id="@+id/favorite_button"
-            android:layout_width="60dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/selectable_button_background"
-            android:layout_alignParentRight="true"
-            android:text="+"
-            android:fontFamily="sans-serif-light"
-            android:textColor="@color/white"
-            android:textSize="35dp" />
-
         <TextView
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="StockAnalyzer"
+            android:text="Stock Momentum"
             android:textColor="@color/white"
             android:fontFamily="sans-serif-medium"
             android:textStyle="bold"
@@ -55,79 +44,123 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/first_section_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="Open Price: "
-                android:textColor="@color/white"/>
+                android:text="Market Info"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic"
+                android:textSize="17dp"/>
 
-            <TextView
-                android:id="@+id/open_price"
+            <View
                 android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/blue"
+                android:layout_marginTop="3dp"/>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="Open Price: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/open_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="High Price: "
-                android:textColor="@color/white"/>
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/high_price"
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="High Price: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/high_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
 
-            <TextView
-                android:layout_width="match_parent"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="Low Price: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/low_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="Low Price: "
-                android:textColor="@color/white"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
 
-            <TextView
-                android:id="@+id/low_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="Close Price: "
+                    android:textColor="@color/white"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="Close Price: "
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/close_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
-
+                <TextView
+                    android:id="@+id/close_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+            
             <!--<TextView-->
                 <!--android:layout_width="match_parent"-->
                 <!--android:layout_height="wrap_content"-->
-                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginTop="5dp"-->
                 <!--android:fontFamily="sans-serif-medium"-->
-                <!--android:textSize="17dp"-->
+                <!--android:textSize="15dp"-->
                 <!--android:text="Change (close price c - close price p): "/>-->
 
             <!--<TextView-->
@@ -137,192 +170,329 @@
                 <!--android:textSize="15dp"-->
                 <!--android:text="10.00000"/>-->
 
+            <LinearLayout
+                android:id="@+id/gain_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="Gain: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/price_gain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+            
+            <LinearLayout
+                android:id="@+id/loss_line"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="Loss: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/price_loss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="Avg Gain (14 days): "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/avg_gain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="Avg Loss (14 days): "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/avg_loss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="RS (avg gain / |avg loss|): "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/rs"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
+                android:text="Momentum Indicators"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic"
                 android:textSize="17dp"
-                android:text="Gain: "
-                android:textColor="@color/white"/>
+                android:layout_marginTop="15dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/blue"
+                android:layout_marginTop="3dp"/>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="14-day RSI: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/rsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="14-day MFI: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/fourteen_days_mfi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="Stochastic Oscillator %K: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/sok"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+            
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="Stochastic Oscillator %D: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/sod"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="Williams %R: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/william_r"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+                
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="5dp"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text="MFI Raw Money Flow: "
+                    android:textColor="@color/white"/>
+
+                <TextView
+                    android:id="@+id/mfi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text="10.00000"
+                    android:textColor="@color/holo_blue_bright"/>
+
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/price_gain"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
+                android:text="Buy/Sell Signal"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic"
                 android:textSize="17dp"
-                android:text="Loss: "
-                android:textColor="@color/white"/>
+                android:layout_marginTop="15dp"/>
 
-            <TextView
-                android:id="@+id/price_loss"
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
+                android:layout_height="1dp"
+                android:background="@color/blue"
+                android:layout_marginTop="3dp"/>
 
-            <TextView
-                android:layout_width="match_parent"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="Avg Gain (14 days): "
-                android:textColor="@color/white"/>
+                android:orientation="vertical"
+                android:layout_marginTop="5dp">
 
-            <TextView
-                android:id="@+id/avg_gain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
+                <TextView
+                    android:id="@+id/signal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="@color/holo_blue_bright"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="Avg Loss (14 days): "
-                android:textColor="@color/white"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="13dp"
+                    android:text="The signal is derived based on above momentum indicators only, any reliance you place on such information is strictly at your own risk."
+                    android:textColor="@color/white"/>
 
-            <TextView
-                android:id="@+id/avg_loss"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="RS (avg gain / |avg loss|): "
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/rs"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="14-day RSI: "
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/rsi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="Stochastic Oscillator %K: "
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/sok"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="Stochastic Oscillator %D: "
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/sod"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="Williams %R: "
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/william_r"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="MFI Raw Money Flow: "
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/mfi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:fontFamily="sans-serif-medium"
-                android:textSize="17dp"
-                android:text="14 days MFI: "
-                android:textColor="@color/white"/>
-
-            <TextView
-                android:id="@+id/fourteen_days_mfi"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"
-                android:text="10.00000"
-                android:textColor="@color/holo_blue_bright"/>
+            </LinearLayout>
 
         </LinearLayout>
 

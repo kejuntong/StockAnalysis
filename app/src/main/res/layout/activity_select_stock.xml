@@ -11,20 +11,32 @@
         android:background="@color/black"
         android:clickable="true">
 
+        <ImageButton
+            android:id="@+id/wish_list_button"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selectable_button_background"
+            android:src="@drawable/ic_menu_favorite_icon"
+            android:scaleType="centerInside"
+            android:padding="12dp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/white"
+            android:textSize="35dp" />
+
         <EditText
             android:id="@+id/search_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"
+            android:layout_toRightOf="@id/wish_list_button"
+            android:layout_marginRight="20dp"
             android:layout_centerVertical="true"
             android:background="@drawable/edit_text_underline_white"
-            android:hint="Enter a company name or a stock symbol"
+            android:hint="Enter company name or stock symbol"
             android:textColorHint="@color/transparent_white_percent_50"
             android:inputType="textCapCharacters"
             android:imeOptions="actionDone"
             android:text=""
-            android:textSize="17dp"
+            android:textSize="15dp"
             android:textColor="@color/white"
             android:textCursorDrawable="@drawable/text_cursor_white" />
 

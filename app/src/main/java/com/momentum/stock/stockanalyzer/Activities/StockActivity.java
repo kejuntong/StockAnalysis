@@ -1,16 +1,23 @@
 package com.momentum.stock.stockanalyzer.Activities;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.momentum.stock.stockanalyzer.Adapters.StockHistoryAdapter;
 import com.momentum.stock.stockanalyzer.R;
+import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +32,7 @@ import yahoofinance.histquotes.Interval;
 public class StockActivity extends Activity {
 
     TextView titleText;
+    Button favoriteButton;
 
     RecyclerView mRecyclerView;
     StockHistoryAdapter mAdapter;
@@ -50,6 +58,8 @@ public class StockActivity extends Activity {
             }
         });
 
+        setFavoriteButton();
+
         // init recycler view
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -64,11 +74,12 @@ public class StockActivity extends Activity {
 
     private void pullData(final String stockId){
         final Calendar calendarFrom = Calendar.getInstance();
-        calendarFrom.add(Calendar.MONTH, -1);
+        calendarFrom.add(Calendar.MONTH, -2);
         calendarFrom.set(Calendar.DATE, 1);
 
         final Calendar calendarTo = Calendar.getInstance();
 
+        findViewById(R.id.loading_layer).setVisibility(View.VISIBLE);
         Thread thread = new Thread(){
             @Override
             public void run() {
@@ -96,7 +107,7 @@ public class StockActivity extends Activity {
                     new Handler(StockActivity.this.getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(StockActivity.this, "shit no data!!", Toast.LENGTH_LONG).show();
+                            Toast.makeText(StockActivity.this, "No data found", Toast.LENGTH_LONG).show();
                         }
                     });
                 }
@@ -105,5 +116,42 @@ public class StockActivity extends Activity {
         };
 
         thread.start();
+    }
+
+    private void setFavoriteButton(){
+        favoriteButton = (Button) findViewById(R.id.favorite_button);
+        favoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MaterialDialog.Builder builder = new MaterialDialog.Builder(StockActivity.this)
+                        .content("Add this stock to your Portfolio" )
+                        .contentColorRes(R.color.black)
+                        .backgroundColorRes(R.color.white)
+                        .positiveText("ADD")
+                        .positiveColorRes(R.color.blue)
+                        .onPositive(new MaterialDialog.SingleButtonCallback() {
+                            @Override
+                            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                SharedPreferences sharedPref = getSharedPreferences(Constants.wishListSharePreference, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPref.edit();
+
+                                String wishListString = sharedPref.getString(Constants.wishListKey, "");
+                                String newItem = stockSymbol + ", " + stockName;
+                                if (!wishListString.contains(newItem)) {
+                                    wishListString = wishListString + newItem + ";";
+                                    editor.putString(Constants.wishListKey, wishListString);
+                                    editor.apply();
+                                } else {
+                                    Toast.makeText(StockActivity.this, "You already have this stock in your Portfolio", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+                        }).negativeText("Cancel")
+                        .negativeColorRes(R.color.red);
+
+                builder.build().show();
+
+            }
+        });
     }
 }

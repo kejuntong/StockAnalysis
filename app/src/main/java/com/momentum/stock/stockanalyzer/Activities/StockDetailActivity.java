@@ -11,8 +11,13 @@ import com.momentum.stock.stockanalyzer.R;
 import com.momentum.stock.stockanalyzer.UtilClasses.Global;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import yahoofinance.histquotes.HistoricalQuote;
 
@@ -36,8 +41,9 @@ public class StockDetailActivity extends Activity {
     TextView williamsRText;
     TextView mfiText;
     TextView fourteenDaysMifText;
+    TextView signalText;
 
-    Button favoriteButton;
+    TextView sectionOneTitle;
 
     List<HistoricalQuote> currentList;
     ArrayList<BigDecimal> gainList;
@@ -55,9 +61,14 @@ public class StockDetailActivity extends Activity {
             }
         });
 
-        setFavoriteButton();
-
         currentList = Global.getInstance().currentList;
+
+        sectionOneTitle = (TextView) findViewById(R.id.first_section_title);
+        Calendar calender = currentList.get(0).getDate();
+        Date date = calender.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("MMM.dd, yyyy", Locale.US);
+        String strDate = dateFormat.format(date);
+        sectionOneTitle.setText("market info - " + strDate);
 
         openPriceText = (TextView) findViewById(R.id.open_price);
         highPriceText = (TextView) findViewById(R.id.high_price);
@@ -74,6 +85,7 @@ public class StockDetailActivity extends Activity {
         williamsRText = (TextView) findViewById(R.id.william_r);
         mfiText = (TextView) findViewById(R.id.mfi);
         fourteenDaysMifText = (TextView) findViewById(R.id.fourteen_days_mfi);
+        signalText = (TextView) findViewById(R.id.signal);
 
         // open, high, low, and close prices
         openPriceText.setText(String.valueOf(currentList.get(0).getOpen()));
@@ -106,6 +118,14 @@ public class StockDetailActivity extends Activity {
         if (gainList.size() > 0) {
             priceGainText.setText(String.valueOf(gainList.get(0)));
             priceLossText.setText(String.valueOf(lossList.get(0)));
+
+            if (gainList.get(0).compareTo(BigDecimal.ZERO) == 0) {
+                findViewById(R.id.gain_line).setVisibility(View.GONE);
+            }
+            if (lossList.get(0).compareTo(BigDecimal.ZERO) == 0) {
+                findViewById(R.id.loss_line).setVisibility(View.GONE);
+            }
+
         } else {
             priceGainText.setText("N/A");
             priceLossText.setText("N/A");
@@ -187,6 +207,7 @@ public class StockDetailActivity extends Activity {
         if (sokList.size() >= 3 ){
             BigDecimal totalSok = BigDecimal.ZERO;
             for (int i=0; i<3; i++){
+                System.out.println("test: " + sokList.get(i));
                 totalSok = totalSok.add(sokList.get(i));
             }
             sodValue = totalSok.divide(BigDecimal.valueOf(3), BigDecimal.ROUND_HALF_UP);
@@ -230,6 +251,7 @@ public class StockDetailActivity extends Activity {
         // 14 days mfi
         BigDecimal posTotal = BigDecimal.ZERO;
         BigDecimal negTotal = BigDecimal.ZERO;
+        BigDecimal fourteenDaysMfi = null;
         if (mfiList.size() >= 14){
             for (int i=0; i<14; i++){
                 if (mfiList.get(i).compareTo(BigDecimal.ZERO) > 0){
@@ -238,7 +260,7 @@ public class StockDetailActivity extends Activity {
                     negTotal = negTotal.add(mfiList.get(i).abs());
                 }
             }
-            BigDecimal fourteenDaysMfi = BigDecimal.valueOf(100).subtract(
+            fourteenDaysMfi = BigDecimal.valueOf(100).subtract(
                     BigDecimal.valueOf(100).divide( BigDecimal.ONE.add(posTotal.divide(negTotal, BigDecimal.ROUND_HALF_UP)), BigDecimal.ROUND_HALF_UP ) );
             fourteenDaysMifText.setText(String.valueOf(fourteenDaysMfi));
         }
@@ -246,10 +268,48 @@ public class StockDetailActivity extends Activity {
             fourteenDaysMifText.setText("N/A");
         }
 
+        // buy/sell signal
+        if (rsi != null && sokValue!= null && sodValue != null && williams != null && fourteenDaysMfi != null){
+            if (rsi.compareTo(BigDecimal.valueOf(80)) > 0 &&
+                    sokValue.compareTo(BigDecimal.valueOf(0.8)) > 0 &&
+                    sodValue.compareTo(BigDecimal.valueOf(0.8)) > 0 &&
+                    williams.abs().compareTo(BigDecimal.valueOf(0.2)) < 0 &&
+                    fourteenDaysMfi.compareTo(BigDecimal.valueOf(90)) > 0) {
+                signalText.setText("strong sell");
+            }
+            else if (rsi.compareTo(BigDecimal.valueOf(020)) < 0 &&
+                    sokValue.compareTo(BigDecimal.valueOf(0.2)) < 0 &&
+                    sodValue.compareTo(BigDecimal.valueOf(0.2)) < 0 &&
+                    williams.abs().compareTo(BigDecimal.valueOf(0.2)) > 0 &&
+                    fourteenDaysMfi.compareTo(BigDecimal.valueOf(10)) < 0){
+                signalText.setText("strong buy");
+            }
+            else if (rsi.compareTo(BigDecimal.valueOf(70)) > 0 &&
+                    sokValue.compareTo(BigDecimal.valueOf(0.7)) > 0 &&
+                    sodValue.compareTo(BigDecimal.valueOf(0.7)) > 0 &&
+                    williams.abs().compareTo(BigDecimal.valueOf(0.3)) < 0 &&
+                    fourteenDaysMfi.compareTo(BigDecimal.valueOf(80)) > 0) {
+                signalText.setText("sell");
+            }
+            else if (rsi.compareTo(BigDecimal.valueOf(30)) < 0 &&
+                    sokValue.compareTo(BigDecimal.valueOf(0.3)) < 0 &&
+                    sodValue.compareTo(BigDecimal.valueOf(0.3)) < 0 &&
+                    williams.abs().compareTo(BigDecimal.valueOf(0.7)) > 0 &&
+                    fourteenDaysMfi.compareTo(BigDecimal.valueOf(20)) < 0){
+                signalText.setText("buy");
+            }
+            else {
+                signalText.setText("hold");
+            }
+        }
+        else {
+            signalText.setText("N/A");
+        }
+
     }
 
     private BigDecimal getLowestInPastFourteenDays(int from){
-        BigDecimal lowest = currentList.get(0).getLow();
+        BigDecimal lowest = currentList.get(from).getLow();
         for (int i=from; i<from+14; i++){
             BigDecimal value = currentList.get(i).getLow();
             if (lowest.compareTo(value) > 0){
@@ -260,7 +320,7 @@ public class StockDetailActivity extends Activity {
     }
 
     private BigDecimal getHighestInPastFourteenDays(int from){
-        BigDecimal highest = currentList.get(0).getHigh();
+        BigDecimal highest = currentList.get(from).getHigh();
         for (int i=from; i<from+14; i++){
             BigDecimal value = currentList.get(i).getHigh();
             if (highest.compareTo(value) < 0){
@@ -270,25 +330,4 @@ public class StockDetailActivity extends Activity {
         return highest;
     }
 
-    private void setFavoriteButton(){
-        favoriteButton = (Button) findViewById(R.id.favorite_button);
-        favoriteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MaterialDialog.Builder builder = new MaterialDialog.Builder(StockDetailActivity.this)
-                        .content("test test add to watch list")
-                        .contentColorRes(R.color.white)
-                        .backgroundColorRes(R.color.white)
-                        .positiveText("ok")
-                        .positiveColorRes(R.color.blue);
-//                        .onPositive(posListener)
-//                        .negativeText(negButtonText)
-//                        .negativeColorRes(negButtonColor)
-//                        .onNegative(negListener);
-
-                builder.build().show();
-
-            }
-        });
-    }
 }
