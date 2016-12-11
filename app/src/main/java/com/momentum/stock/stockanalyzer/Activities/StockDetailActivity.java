@@ -68,7 +68,7 @@ public class StockDetailActivity extends Activity {
         Date date = calender.getTime();
         DateFormat dateFormat = new SimpleDateFormat("MMM.dd, yyyy", Locale.US);
         String strDate = dateFormat.format(date);
-        sectionOneTitle.setText("market info - " + strDate);
+        sectionOneTitle.setText("Market Info - " + strDate);
 
         openPriceText = (TextView) findViewById(R.id.open_price);
         highPriceText = (TextView) findViewById(R.id.high_price);
@@ -141,10 +141,10 @@ public class StockDetailActivity extends Activity {
                 totalGain = totalGain.add(gainList.get(i));
                 totalLoss = totalLoss.add(lossList.get(i));
             }
-            avgGain = totalGain.divide(BigDecimal.valueOf(14), BigDecimal.ROUND_HALF_UP);
-            avgLoss = totalLoss.divide(BigDecimal.valueOf(14), BigDecimal.ROUND_HALF_UP);
-            avgGainText.setText(String.valueOf(avgGain));
-            avgLossText.setText(String.valueOf(avgLoss));
+            avgGain = totalGain.divide(BigDecimal.valueOf(14), 6, BigDecimal.ROUND_HALF_UP);
+            avgLoss = totalLoss.divide(BigDecimal.valueOf(14), 6, BigDecimal.ROUND_HALF_UP);
+            avgGainText.setText(String.valueOf(avgGain.setScale(2, BigDecimal.ROUND_HALF_UP)));
+            avgLossText.setText(String.valueOf(avgLoss.setScale(2, BigDecimal.ROUND_HALF_UP)));
         }
         else {
             avgGainText.setText("N/A");
@@ -155,15 +155,15 @@ public class StockDetailActivity extends Activity {
         BigDecimal rs = null;
         BigDecimal rsi = null;
         if (avgGain != null && avgLoss.compareTo(BigDecimal.ZERO) != 0){
-            rs = avgGain.divide(avgLoss.abs(), BigDecimal.ROUND_HALF_UP);
+            rs = avgGain.divide(avgLoss.abs(), 6, BigDecimal.ROUND_HALF_UP);
             if (avgLoss.compareTo(BigDecimal.ZERO) == 0){
                 rsi = BigDecimal.valueOf(100);
             } else {
                 rsi = BigDecimal.valueOf(100).
-                        subtract(BigDecimal.valueOf(100).divide(rs.add(BigDecimal.ONE), BigDecimal.ROUND_HALF_UP));
+                        subtract(BigDecimal.valueOf(100).divide(rs.add(BigDecimal.ONE), 6, BigDecimal.ROUND_HALF_UP));
             }
-            rsText.setText(String.valueOf(rs));
-            rsiText.setText(String.valueOf(rsi));
+            rsText.setText(String.valueOf(rs.setScale(2, BigDecimal.ROUND_HALF_UP)));
+            rsiText.setText(String.valueOf(rsi.setScale(2, BigDecimal.ROUND_HALF_UP)));
         } else {
             rsText.setText("N/A");
             rsiText.setText("N/A");
@@ -175,21 +175,21 @@ public class StockDetailActivity extends Activity {
             BigDecimal closeDay1 = currentList.get(0).getClose();
             BigDecimal sok1 = closeDay1.subtract(getLowestInPastFourteenDays(0)).
                     divide(getHighestInPastFourteenDays(0).subtract(getLowestInPastFourteenDays(0)),
-                            BigDecimal.ROUND_HALF_UP);
+                            6, BigDecimal.ROUND_HALF_UP);
             sokList.add(sok1);
         }
         if (currentList.size() >= 15){
             BigDecimal closeDay2 = currentList.get(1).getClose();
             BigDecimal sok2 = closeDay2.subtract(getLowestInPastFourteenDays(1)).
                     divide(getHighestInPastFourteenDays(1).subtract(getLowestInPastFourteenDays(1)),
-                            BigDecimal.ROUND_HALF_UP);
+                            6, BigDecimal.ROUND_HALF_UP);
             sokList.add(sok2);
         }
         if (currentList.size() >= 16){
             BigDecimal closeDay3 = currentList.get(2).getClose();
             BigDecimal sok3 = closeDay3.subtract(getLowestInPastFourteenDays(2)).
                     divide(getHighestInPastFourteenDays(2).subtract(getLowestInPastFourteenDays(2)),
-                            BigDecimal.ROUND_HALF_UP);
+                            6, BigDecimal.ROUND_HALF_UP);
             sokList.add(sok3);
         }
 
@@ -197,7 +197,7 @@ public class StockDetailActivity extends Activity {
         BigDecimal sokValue = null;
         if (sokList.size() > 0){
             sokValue = sokList.get(0).multiply(BigDecimal.valueOf(100));
-            sokText.setText(String.valueOf(sokValue) + "%");
+            sokText.setText(String.valueOf(sokValue.setScale(2, BigDecimal.ROUND_HALF_UP)) + "%");
         } else {
             sokText.setText("N/A");
         }
@@ -210,16 +210,16 @@ public class StockDetailActivity extends Activity {
                 System.out.println("test: " + sokList.get(i));
                 totalSok = totalSok.add(sokList.get(i));
             }
-            sodValue = totalSok.divide(BigDecimal.valueOf(3), BigDecimal.ROUND_HALF_UP);
-            sodText.setText(String.valueOf(sodValue.multiply(BigDecimal.valueOf(100))) + "%");
+            sodValue = totalSok.divide(BigDecimal.valueOf(3), 6, BigDecimal.ROUND_HALF_UP);
+            sodText.setText(String.valueOf(sodValue.multiply(BigDecimal.valueOf(100)).setScale(2, BigDecimal.ROUND_HALF_UP)) + "%");
         }
 
         // williams
         BigDecimal williams = null;
         if (currentList.size() >= 14){
             williams = currentList.get(0).getClose().subtract(getHighestInPastFourteenDays(0)).
-                    divide(getHighestInPastFourteenDays(0).subtract(getLowestInPastFourteenDays(0)), BigDecimal.ROUND_HALF_UP);
-            williamsRText.setText(String.valueOf(williams.multiply(BigDecimal.valueOf(100))) + "%");
+                    divide(getHighestInPastFourteenDays(0).subtract(getLowestInPastFourteenDays(0)), 6, BigDecimal.ROUND_HALF_UP);
+            williamsRText.setText(String.valueOf(williams.multiply(BigDecimal.valueOf(100)).setScale(2, BigDecimal.ROUND_HALF_UP)) + "%");
         } else {
             williamsRText.setText("N/A");
         }
@@ -229,8 +229,8 @@ public class StockDetailActivity extends Activity {
         for (int i=0; i<currentList.size()-1; i++){
             BigDecimal mfi;
             // high + low + close / 3
-            BigDecimal hlcThis = currentList.get(i).getHigh().add(currentList.get(i).getLow()).add(currentList.get(i).getClose()).divide(BigDecimal.valueOf(3), BigDecimal.ROUND_HALF_UP);
-            BigDecimal hlcPrevious = currentList.get(i+1).getHigh().add(currentList.get(i+1).getLow()).add(currentList.get(i+1).getClose()).divide(BigDecimal.valueOf(3), BigDecimal.ROUND_HALF_UP);
+            BigDecimal hlcThis = currentList.get(i).getHigh().add(currentList.get(i).getLow()).add(currentList.get(i).getClose()).divide(BigDecimal.valueOf(3), 6, BigDecimal.ROUND_HALF_UP);
+            BigDecimal hlcPrevious = currentList.get(i+1).getHigh().add(currentList.get(i+1).getLow()).add(currentList.get(i+1).getClose()).divide(BigDecimal.valueOf(3), 6, BigDecimal.ROUND_HALF_UP);
             if (hlcThis.compareTo(hlcPrevious) > 0 ){
                 mfi = hlcThis.multiply(BigDecimal.valueOf(currentList.get(i).getVolume()));
             }
@@ -243,7 +243,7 @@ public class StockDetailActivity extends Activity {
             mfiList.add(mfi);
         }
         if (mfiList.size() > 0){
-            mfiText.setText(String.valueOf(mfiList.get(0)));
+            mfiText.setText(String.valueOf(mfiList.get(0).setScale(2, BigDecimal.ROUND_HALF_UP)));
         } else {
             mfiText.setText("N/A");
         }
@@ -261,8 +261,9 @@ public class StockDetailActivity extends Activity {
                 }
             }
             fourteenDaysMfi = BigDecimal.valueOf(100).subtract(
-                    BigDecimal.valueOf(100).divide( BigDecimal.ONE.add(posTotal.divide(negTotal, BigDecimal.ROUND_HALF_UP)), BigDecimal.ROUND_HALF_UP ) );
-            fourteenDaysMifText.setText(String.valueOf(fourteenDaysMfi));
+                    BigDecimal.valueOf(100).divide( BigDecimal.ONE.add(posTotal.divide(
+                            negTotal, 6, BigDecimal.ROUND_HALF_UP)), 6, BigDecimal.ROUND_HALF_UP ) );
+            fourteenDaysMifText.setText(String.valueOf(fourteenDaysMfi.setScale(2, BigDecimal.ROUND_HALF_UP)));
         }
         else {
             fourteenDaysMifText.setText("N/A");
