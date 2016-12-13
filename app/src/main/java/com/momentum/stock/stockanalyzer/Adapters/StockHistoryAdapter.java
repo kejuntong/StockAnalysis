@@ -8,8 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.momentum.stock.stockanalyzer.Activities.StockActivity;
 import com.momentum.stock.stockanalyzer.Activities.StockDetailActivity;
 import com.momentum.stock.stockanalyzer.R;
+import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
 import com.momentum.stock.stockanalyzer.UtilClasses.Global;
 
 import java.math.BigDecimal;
@@ -102,20 +104,23 @@ public class StockHistoryAdapter extends
         // volume
         holder.volumeText.setText(NumberFormat.getNumberInstance(Locale.US).format(item.getVolume()));
 
-        if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) < 0){
-            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_red);
-        } else if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) > 0) {
-            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_green);
-        } else {
-            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_white);
-        }
+//        if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) < 0){
+//            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_red);
+//        } else if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) > 0) {
+//            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_green);
+//        } else {
+//            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_white);
+//        }
 
         // go to detail
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Global.getInstance().currentList = itemList.subList(position, itemList.size());
-                mContext.startActivity(new Intent(mContext, StockDetailActivity.class));
+                Intent intent = new Intent(mContext, StockDetailActivity.class);
+                intent.putExtra("symbol", ( (StockActivity) mContext).getStockSymbol());
+                intent.putExtra("name", ( (StockActivity) mContext).getStockName());
+                mContext.startActivity(intent);
             }
         });
 

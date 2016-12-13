@@ -154,4 +154,12 @@ public class StockActivity extends Activity {
             }
         });
     }
+
+    public String getStockSymbol(){
+        return this.stockSymbol;
+    }
+    public String getStockName(){
+        return this.stockName;
+    }
+
 }

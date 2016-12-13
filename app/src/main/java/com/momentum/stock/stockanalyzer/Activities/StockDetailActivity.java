@@ -12,6 +12,7 @@ import com.momentum.stock.stockanalyzer.UtilClasses.Global;
 
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -30,6 +31,7 @@ public class StockDetailActivity extends Activity {
     TextView highPriceText;
     TextView lowPriceText;
     TextView closePriceText;
+    TextView volumeText;
     TextView priceGainText;
     TextView priceLossText;
     TextView avgGainText;
@@ -43,6 +45,7 @@ public class StockDetailActivity extends Activity {
     TextView fourteenDaysMifText;
     TextView signalText;
 
+    TextView titleTextView;
     TextView sectionOneTitle;
 
     List<HistoricalQuote> currentList;
@@ -63,6 +66,11 @@ public class StockDetailActivity extends Activity {
 
         currentList = Global.getInstance().currentList;
 
+        titleTextView = (TextView) findViewById(R.id.title_text);
+        String symbol = getIntent().getExtras().getString("symbol");
+        String name= getIntent().getExtras().getString("name");
+        titleTextView.setText(symbol + ", " + name);
+
         sectionOneTitle = (TextView) findViewById(R.id.first_section_title);
         Calendar calender = currentList.get(0).getDate();
         Date date = calender.getTime();
@@ -74,6 +82,7 @@ public class StockDetailActivity extends Activity {
         highPriceText = (TextView) findViewById(R.id.high_price);
         lowPriceText = (TextView) findViewById(R.id.low_price);
         closePriceText = (TextView) findViewById(R.id.close_price);
+        volumeText = (TextView) findViewById(R.id.volume);
         priceGainText = (TextView) findViewById(R.id.price_gain);
         priceLossText = (TextView) findViewById(R.id.price_loss);
         avgGainText = (TextView) findViewById(R.id.avg_gain);
@@ -87,11 +96,12 @@ public class StockDetailActivity extends Activity {
         fourteenDaysMifText = (TextView) findViewById(R.id.fourteen_days_mfi);
         signalText = (TextView) findViewById(R.id.signal);
 
-        // open, high, low, and close prices
-        openPriceText.setText(String.valueOf(currentList.get(0).getOpen()));
-        highPriceText.setText(String.valueOf(currentList.get(0).getHigh()));
-        lowPriceText.setText(String.valueOf(currentList.get(0).getLow()));
-        closePriceText.setText(String.valueOf(currentList.get(0).getClose()));
+        // open, high, low, close prices, and volume
+        openPriceText.setText(String.valueOf(currentList.get(0).getOpen().setScale(2, BigDecimal.ROUND_HALF_UP)));
+        highPriceText.setText(String.valueOf(currentList.get(0).getHigh().setScale(2, BigDecimal.ROUND_HALF_UP)));
+        lowPriceText.setText(String.valueOf(currentList.get(0).getLow().setScale(2, BigDecimal.ROUND_HALF_UP)));
+        closePriceText.setText(String.valueOf(currentList.get(0).getClose().setScale(2, BigDecimal.ROUND_HALF_UP)));
+        volumeText.setText(NumberFormat.getNumberInstance(Locale.US).format(currentList.get(0).getVolume()));
 
         // calculate gain and loss
         gainList = new ArrayList<>();
@@ -116,8 +126,8 @@ public class StockDetailActivity extends Activity {
 
         // gain and loss of this stock
         if (gainList.size() > 0) {
-            priceGainText.setText(String.valueOf(gainList.get(0)));
-            priceLossText.setText(String.valueOf(lossList.get(0)));
+            priceGainText.setText(String.valueOf(gainList.get(0).setScale(2, BigDecimal.ROUND_HALF_UP)));
+            priceLossText.setText(String.valueOf(lossList.get(0).setScale(2, BigDecimal.ROUND_HALF_UP)));
 
             if (gainList.get(0).compareTo(BigDecimal.ZERO) == 0) {
                 findViewById(R.id.gain_line).setVisibility(View.GONE);

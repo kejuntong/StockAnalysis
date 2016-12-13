@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="@color/white">
+    android:background="@drawable/selectable_row_background_black">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -18,7 +18,8 @@
             android:layout_gravity="center"
             android:text="Dec.1\n2016"
             android:textStyle="italic"
-            android:textSize="13dp"/>
+            android:textSize="13dp"
+            android:textColor="@color/holo_blue_bright"/>
 
         <LinearLayout
             android:id="@+id/open_container"
@@ -36,7 +37,8 @@
                 android:layout_gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="Open:"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:textColor="@color/holo_blue_bright"/>
 
             <TextView
                 android:id="@+id/open_price"
@@ -45,7 +47,8 @@
                 android:singleLine="true"
                 android:maxLength="5"
                 android:text="10.00000"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:textColor="@color/holo_blue_bright"/>
 
         </LinearLayout>
 
@@ -65,7 +68,8 @@
                 android:layout_gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="High:"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:textColor="@color/holo_blue_bright"/>
 
             <TextView
                 android:id="@+id/high_price"
@@ -74,7 +78,8 @@
                 android:singleLine="true"
                 android:maxLength="5"
                 android:text="10.00000"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:textColor="@color/holo_blue_bright"/>
 
         </LinearLayout>
 
@@ -94,7 +99,8 @@
                 android:layout_gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="Low:"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:textColor="@color/holo_blue_bright"/>
 
             <TextView
                 android:id="@+id/low_price"
@@ -103,7 +109,8 @@
                 android:singleLine="true"
                 android:maxLength="5"
                 android:text="10.00000"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:textColor="@color/holo_blue_bright"/>
 
         </LinearLayout>
 
@@ -123,7 +130,8 @@
                 android:layout_gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="Close:"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:textColor="@color/holo_blue_bright"/>
 
             <TextView
                 android:id="@+id/close_price"
@@ -132,7 +140,8 @@
                 android:maxLength="5"
                 android:maxWidth="80dp"
                 android:text="10.00000"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:textColor="@color/holo_blue_bright"/>
 
         </LinearLayout>
 
@@ -152,7 +161,8 @@
                 android:layout_gravity="center_horizontal"
                 android:singleLine="true"
                 android:text="Volume:"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:textColor="@color/holo_blue_bright"/>
 
             <TextView
                 android:id="@+id/volume"
@@ -161,7 +171,8 @@
                 android:maxLength="15"
                 android:maxWidth="80dp"
                 android:text="10.00000"
-                android:textSize="13dp"/>
+                android:textSize="13dp"
+                android:textColor="@color/holo_blue_bright"/>
 
         </LinearLayout>
 
@@ -170,7 +181,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/transparent_black_percent_15"
+        android:background="@color/transparent_white_percent_15"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
