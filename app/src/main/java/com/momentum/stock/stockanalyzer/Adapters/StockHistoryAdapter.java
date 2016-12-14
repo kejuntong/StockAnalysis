@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.momentum.stock.stockanalyzer.Activities.StockActivity;
@@ -53,6 +54,8 @@ public class StockHistoryAdapter extends
         TextView lowPriceText;
         TextView closePriceText;
         TextView volumeText;
+
+        ImageView indicatorCircle;
     }
 
     @Override
@@ -67,6 +70,8 @@ public class StockHistoryAdapter extends
         viewHolder.lowPriceText = (TextView) view.findViewById(R.id.low_price);
         viewHolder.closePriceText = (TextView) view.findViewById(R.id.close_price);
         viewHolder.volumeText = (TextView) view.findViewById(R.id.volume);
+
+        viewHolder.indicatorCircle = (ImageView) view.findViewById(R.id.circle_indicator);
 
         return viewHolder;
     }
@@ -104,13 +109,14 @@ public class StockHistoryAdapter extends
         // volume
         holder.volumeText.setText(NumberFormat.getNumberInstance(Locale.US).format(item.getVolume()));
 
-//        if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) < 0){
-//            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_red);
-//        } else if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) > 0) {
-//            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_green);
-//        } else {
-//            holder.itemView.setBackgroundResource(R.drawable.selectable_row_background_white);
-//        }
+        // setting indicator
+        if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) < 0){
+            holder.indicatorCircle.setImageResource(R.drawable.circle_red);
+        } else if (closePrice.subtract(openPrice).compareTo(BigDecimal.ZERO) > 0) {
+            holder.indicatorCircle.setImageResource(R.drawable.circle_green);
+        } else {
+            holder.indicatorCircle.setImageResource(R.drawable.circle_white);
+        }
 
         // go to detail
         holder.itemView.setOnClickListener(new View.OnClickListener() {

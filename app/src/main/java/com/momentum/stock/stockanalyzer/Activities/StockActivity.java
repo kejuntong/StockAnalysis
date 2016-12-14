@@ -3,6 +3,7 @@ package com.momentum.stock.stockanalyzer.Activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Handler;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -24,6 +25,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import lecho.lib.hellocharts.model.Line;
+import lecho.lib.hellocharts.model.LineChartData;
+import lecho.lib.hellocharts.model.PointValue;
+import lecho.lib.hellocharts.view.LineChartView;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
@@ -40,6 +45,8 @@ public class StockActivity extends Activity {
 
     String stockSymbol;
     String stockName;
+
+    LineChartView lineChartView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +106,9 @@ public class StockActivity extends Activity {
                         public void run() {
                             mAdapter.notifyDataSetChanged();
                             findViewById(R.id.loading_layer).setVisibility(View.GONE);
+
+//                            drawChart();
+
                         }
                     });
 
@@ -162,4 +172,21 @@ public class StockActivity extends Activity {
         return this.stockName;
     }
 
+//    public void drawChart(){
+//        lineChartView = (LineChartView) findViewById(R.id.chart);
+//        List<PointValue> values = new ArrayList<PointValue>();
+//        for (int i=0; i<historyList.size(); i++) {
+//            values.add(new PointValue(i, historyList.get(i).getClose().floatValue()));
+//        }
+//
+//        //In most cased you can call data model methods in builder-pattern-like manner.
+//        Line line = new Line(values).setColor(Color.BLUE).setCubic(true);
+//        List<Line> lines = new ArrayList<Line>();
+//        lines.add(line);
+//
+//        LineChartData data = new LineChartData();
+//        data.setLines(lines);
+//
+//        lineChartView.setLineChartData(data);
+//    }
 }
