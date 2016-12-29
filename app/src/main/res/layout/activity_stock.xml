@@ -47,12 +47,18 @@
 
     </RelativeLayout>
 
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/title_bar"/>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:layout_below="@+id/title_bar"/>
+        android:layout_below="@+id/line_chart"/>
 
     <RelativeLayout
         android:id="@+id/loading_layer"

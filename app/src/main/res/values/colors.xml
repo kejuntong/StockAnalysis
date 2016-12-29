@@ -155,6 +155,7 @@
 
     <color name="trans_green_30">#4D008000</color>
     <color name="trans_red_30">#4DFF0000</color>
+    <color name="trans_holo_blue_bright_30">#4D00ddff</color>
 
     <!-- Black Transparent -->
     <color name="transparent_black_percent_5">#0D000000</color>

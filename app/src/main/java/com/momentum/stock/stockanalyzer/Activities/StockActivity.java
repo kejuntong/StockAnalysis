@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Handler;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,19 +17,30 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.momentum.stock.stockanalyzer.Adapters.StockHistoryAdapter;
+import com.momentum.stock.stockanalyzer.CustomViews.MyMarkerView;
 import com.momentum.stock.stockanalyzer.R;
 import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-import lecho.lib.hellocharts.model.Line;
-import lecho.lib.hellocharts.model.LineChartData;
-import lecho.lib.hellocharts.model.PointValue;
-import lecho.lib.hellocharts.view.LineChartView;
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
@@ -46,7 +58,7 @@ public class StockActivity extends Activity {
     String stockSymbol;
     String stockName;
 
-    LineChartView lineChartView;
+    LineChart lineChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,16 +79,19 @@ public class StockActivity extends Activity {
 
         setFavoriteButton();
 
-        // init recycler view
+        initRecyclerView();
+
+        pullData(stockSymbol);
+
+    }
+
+    private void initRecyclerView(){
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         historyList = new ArrayList<>();
         mAdapter = new StockHistoryAdapter(this, historyList);
         mRecyclerView.setAdapter(mAdapter);
-
-        pullData(stockSymbol);
-
     }
 
     private void pullData(final String stockId){
@@ -107,7 +122,7 @@ public class StockActivity extends Activity {
                             mAdapter.notifyDataSetChanged();
                             findViewById(R.id.loading_layer).setVisibility(View.GONE);
 
-//                            drawChart();
+                            setLineChart();
 
                         }
                     });
@@ -126,6 +141,73 @@ public class StockActivity extends Activity {
         };
 
         thread.start();
+    }
+
+    public void setLineChart(){
+        lineChart = (LineChart) findViewById(R.id.line_chart);
+
+        lineChart.setTouchEnabled(true);
+        lineChart.setDragEnabled(true);
+        lineChart.setScaleEnabled(true);
+        lineChart.setPinchZoom(true);
+        Description description = new Description();
+        description.setText("data from Yahoo");
+        description.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.yellow));
+        lineChart.setDescription(description);
+
+        MyMarkerView mv = new MyMarkerView(this, R.layout.view_my_marker);
+        mv.setChartView(lineChart); // For bounds control
+        lineChart.setMarker(mv); // Set the marker to the chart
+
+        XAxis xAxis = lineChart.getXAxis();
+//        xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
+//        xAxis.setAxisMinimum(0f);
+//        xAxis.setGranularity(1f);
+        xAxis.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.yellow));
+        xAxis.setValueFormatter(new IAxisValueFormatter() {
+            @Override
+            public String getFormattedValue(float value, AxisBase axis) {
+
+                HistoricalQuote historicalQuote = historyList.get(historyList.size() - 1 -(int)value);
+                Date date = historicalQuote.getDate().getTime();
+                DateFormat dateFormat = new SimpleDateFormat("MMM.dd", Locale.US);
+                return dateFormat.format(date);
+            }
+        });
+
+        YAxis yAxisLeft = lineChart.getAxisLeft();
+        YAxis yAxisRight = lineChart.getAxisRight();
+        yAxisLeft.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.yellow));
+        yAxisRight.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.yellow));
+
+        Legend legend = lineChart.getLegend();
+        legend.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.yellow));
+
+        List<Entry> entries = new ArrayList<Entry>();
+        for (int i=0; i<historyList.size(); i++) {
+            HistoricalQuote historicalQuote = historyList.get(historyList.size()-1-i);
+            long timeTest = historicalQuote.getDate().getTimeInMillis();
+            System.out.println("test time 1: " + timeTest);
+            System.out.println("test time 2: " + (float) timeTest);
+            entries.add(new Entry(i, historicalQuote.getClose().floatValue()));
+        }
+
+        LineDataSet dataSet = new LineDataSet(entries, "Close Price"); // add entries to dataset
+        dataSet.enableDashedLine(10f, 5f, 0f);
+        dataSet.enableDashedHighlightLine(10f, 5f, 0f);
+        dataSet.setColor(ContextCompat.getColor(StockActivity.this, R.color.orange));
+        dataSet.setCircleColor(ContextCompat.getColor(StockActivity.this, R.color.holo_blue_bright));
+        dataSet.setLineWidth(1f);
+        dataSet.setCircleRadius(3f);
+        dataSet.setDrawCircleHole(false);
+        dataSet.setDrawValues(false);
+//        dataSet.setValueTextSize(9f);
+//        dataSet.setValueTextColor(ContextCompat.getColor(StockActivity.this, R.color.red));
+        dataSet.setDrawFilled(true);
+
+        LineData lineData = new LineData(dataSet);
+        lineChart.setData(lineData);
+        lineChart.invalidate(); // refresh
     }
 
     private void setFavoriteButton(){
@@ -171,22 +253,4 @@ public class StockActivity extends Activity {
     public String getStockName(){
         return this.stockName;
     }
-
-//    public void drawChart(){
-//        lineChartView = (LineChartView) findViewById(R.id.chart);
-//        List<PointValue> values = new ArrayList<PointValue>();
-//        for (int i=0; i<historyList.size(); i++) {
-//            values.add(new PointValue(i, historyList.get(i).getClose().floatValue()));
-//        }
-//
-//        //In most cased you can call data model methods in builder-pattern-like manner.
-//        Line line = new Line(values).setColor(Color.BLUE).setCubic(true);
-//        List<Line> lines = new ArrayList<Line>();
-//        lines.add(line);
-//
-//        LineChartData data = new LineChartData();
-//        data.setLines(lines);
-//
-//        lineChartView.setLineChartData(data);
-//    }
 }
