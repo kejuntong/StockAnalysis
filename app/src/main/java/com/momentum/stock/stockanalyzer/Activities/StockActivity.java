@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +34,7 @@ import com.momentum.stock.stockanalyzer.R;
 import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -45,6 +47,7 @@ import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
+import yahoofinance.quotes.stock.StockQuote;
 
 public class StockActivity extends Activity {
 
@@ -54,6 +57,10 @@ public class StockActivity extends Activity {
     RecyclerView mRecyclerView;
     StockHistoryAdapter mAdapter;
     ArrayList<HistoricalQuote> historyList;
+
+    TextView currentPriceText;
+    ImageView upArrow;
+    ImageView downArrow;
 
     String stockSymbol;
     String stockName;
@@ -79,27 +86,25 @@ public class StockActivity extends Activity {
 
         setFavoriteButton();
 
-        initRecyclerView();
+        initViews();
 
         pullData(stockSymbol);
-
     }
 
-    private void initRecyclerView(){
+    private void initViews(){
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(linearLayoutManager);
         historyList = new ArrayList<>();
         mAdapter = new StockHistoryAdapter(this, historyList);
         mRecyclerView.setAdapter(mAdapter);
+
+        currentPriceText = (TextView) findViewById(R.id.latest_price);
+        upArrow = (ImageView) findViewById(R.id.arrow_image_up);
+        downArrow = (ImageView) findViewById(R.id.arrow_image_down);
     }
 
     private void pullData(final String stockId){
-        final Calendar calendarFrom = Calendar.getInstance();
-        calendarFrom.add(Calendar.MONTH, -2);
-        calendarFrom.set(Calendar.DATE, 1);
-
-        final Calendar calendarTo = Calendar.getInstance();
 
         findViewById(R.id.loading_layer).setVisibility(View.VISIBLE);
         Thread thread = new Thread(){
@@ -107,9 +112,27 @@ public class StockActivity extends Activity {
             public void run() {
                 Stock stock = null;
                 try {
-//                    tesla = YahooFinance.get("TSLA", true);
                     stock = YahooFinance.get(stockId, true);
-//                    System.out.println(tesla.getHistory(calendarFrom, calendarTo, Interval.DAILY));
+
+                    // current data
+                    final StockQuote stockQuote = stock.getQuote();
+                    new Handler(StockActivity.this.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            currentPriceText.setText("" + stockQuote.getPrice());
+                            if (stockQuote.getChange().compareTo(BigDecimal.ZERO) > 0){
+                                upArrow.setVisibility(View.VISIBLE);
+                            } else {
+                                downArrow.setVisibility(View.VISIBLE);
+                            }
+                        }
+                    });
+
+                    // history data
+                    Calendar calendarFrom = Calendar.getInstance();
+                    calendarFrom.add(Calendar.MONTH, -2);
+                    calendarFrom.set(Calendar.DATE, 1);
+                    Calendar calendarTo = Calendar.getInstance();
                     List<HistoricalQuote> list = stock.getHistory(calendarFrom, calendarTo, Interval.DAILY);
                     historyList.clear();
                     for (HistoricalQuote item : list){

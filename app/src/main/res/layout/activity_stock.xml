@@ -50,15 +50,91 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/line_chart"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="250dp"
         android:layout_below="@+id/title_bar"/>
+
+    <RelativeLayout
+        android:id="@+id/current_info_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/line_chart">
+
+        <TextView
+            android:id="@+id/market_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Market Info"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic"
+            android:textSize="17dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/market_info_title"
+            android:background="@color/blue"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:id="@+id/latest_price_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/market_info_title"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="10dp"
+            android:text="Latest price (update every 5 seconds):"
+            android:textSize="15dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/latest_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/latest_price_label"
+            android:layout_toRightOf="@+id/latest_price_label"
+            android:layout_marginLeft="10dp"
+            android:text=""
+            android:textSize="15dp"
+            android:textColor="@color/holo_blue_bright"/>
+
+        <ImageView
+            android:id="@+id/arrow_image_up"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:scaleType="centerCrop"
+            android:layout_below="@+id/market_info_title"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/latest_price"
+            android:src="@drawable/arrow_up"
+            android:tint="@color/green"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/arrow_image_down"
+            android:layout_width="15dp"
+            android:layout_height="20dp"
+            android:scaleType="centerCrop"
+            android:layout_below="@+id/market_info_title"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/latest_price"
+            android:src="@drawable/arrow_down"
+            android:tint="@color/red"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:layout_below="@+id/line_chart"/>
+        android:layout_below="@+id/current_info_container"/>
 
     <RelativeLayout
         android:id="@+id/loading_layer"
