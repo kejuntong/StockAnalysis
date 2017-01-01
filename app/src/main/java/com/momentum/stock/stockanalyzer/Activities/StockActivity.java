@@ -13,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -61,11 +62,16 @@ public class StockActivity extends Activity {
     TextView currentPriceText;
     ImageView upArrow;
     ImageView downArrow;
+    TextView lastUpdateText;
+    ImageView refreshButton;
+    ProgressBar refreshSpinner;
 
     String stockSymbol;
     String stockName;
 
     LineChart lineChart;
+
+    Handler mainThreadHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +95,8 @@ public class StockActivity extends Activity {
         initViews();
 
         pullData(stockSymbol);
+
+        setRefreshButton();
     }
 
     private void initViews(){
@@ -102,9 +110,16 @@ public class StockActivity extends Activity {
         currentPriceText = (TextView) findViewById(R.id.latest_price);
         upArrow = (ImageView) findViewById(R.id.arrow_image_up);
         downArrow = (ImageView) findViewById(R.id.arrow_image_down);
+        lastUpdateText = (TextView) findViewById(R.id.last_update_text);
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat("MMM.dd, HH:mm:ss", Locale.US);
+        String strDate = dateFormat.format(date);
+        lastUpdateText.setText(strDate);
     }
 
     private void pullData(final String stockId){
+
+        mainThreadHandler = new Handler(StockActivity.this.getMainLooper());
 
         findViewById(R.id.loading_layer).setVisibility(View.VISIBLE);
         Thread thread = new Thread(){
@@ -116,17 +131,7 @@ public class StockActivity extends Activity {
 
                     // current data
                     final StockQuote stockQuote = stock.getQuote();
-                    new Handler(StockActivity.this.getMainLooper()).post(new Runnable() {
-                        @Override
-                        public void run() {
-                            currentPriceText.setText("" + stockQuote.getPrice());
-                            if (stockQuote.getChange().compareTo(BigDecimal.ZERO) > 0){
-                                upArrow.setVisibility(View.VISIBLE);
-                            } else {
-                                downArrow.setVisibility(View.VISIBLE);
-                            }
-                        }
-                    });
+                    updateCurrentInfoSection(stockQuote);
 
                     // history data
                     Calendar calendarFrom = Calendar.getInstance();
@@ -139,7 +144,7 @@ public class StockActivity extends Activity {
                         historyList.add(item);
                     }
 
-                    new Handler(StockActivity.this.getMainLooper()).post(new Runnable() {
+                    mainThreadHandler.post(new Runnable() {
                         @Override
                         public void run() {
                             mAdapter.notifyDataSetChanged();
@@ -166,6 +171,39 @@ public class StockActivity extends Activity {
         thread.start();
     }
 
+    public void updateCurrentInfoSection(final StockQuote stockQuote){
+        new Handler(StockActivity.this.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                if (stockQuote.getChange().compareTo(BigDecimal.ZERO) > 0){
+                    currentPriceText.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.green));
+                    upArrow.setVisibility(View.VISIBLE);
+                    downArrow.setVisibility(View.GONE);
+                } else if (stockQuote.getChange().compareTo(BigDecimal.ZERO) < 0){
+                    currentPriceText.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.red));
+                    downArrow.setVisibility(View.VISIBLE);
+                    upArrow.setVisibility(View.GONE);
+                } else {
+                    currentPriceText.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.holo_blue_bright));
+                    downArrow.setVisibility(View.GONE);
+                    upArrow.setVisibility(View.GONE);
+                }
+                currentPriceText.setText("" + stockQuote.getPrice());
+
+                refreshButton.setVisibility(View.VISIBLE);
+                refreshSpinner.setVisibility(View.INVISIBLE);
+
+                Date date = new Date();
+                DateFormat dateFormat = new SimpleDateFormat("MMM.dd, HH:mm:ss", Locale.US);
+                String strDate = dateFormat.format(date);
+                lastUpdateText.setText(strDate);
+
+//                System.out.println("test date 1: " + stockQuote.getLastTradeTime().get(Calendar.DAY_OF_YEAR));
+//                System.out.println("test date 2: " + Calendar.getInstance().get(Calendar.DAY_OF_YEAR));
+            }
+        });
+    }
+
     public void setLineChart(){
         lineChart = (LineChart) findViewById(R.id.line_chart);
 
@@ -174,7 +212,7 @@ public class StockActivity extends Activity {
         lineChart.setScaleEnabled(true);
         lineChart.setPinchZoom(true);
         Description description = new Description();
-        description.setText("data from Yahoo");
+        description.setText("data retrieved from Yahoo Finance");
         description.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.yellow));
         lineChart.setDescription(description);
 
@@ -269,6 +307,44 @@ public class StockActivity extends Activity {
             }
         });
     }
+
+    public void setRefreshButton(){
+        refreshButton = (ImageView) findViewById(R.id.button_refresh);
+        refreshSpinner = (ProgressBar) findViewById(R.id.refresh_spinner);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                refreshButton.setVisibility(View.INVISIBLE);
+                refreshSpinner.setVisibility(View.VISIBLE);
+
+                new Thread(){
+                    @Override
+                    public void run() {
+                        Stock stock = null;
+                        try {
+                            stock = YahooFinance.get(stockSymbol, false);
+
+                            // current data
+                            final StockQuote stockQuote = stock.getQuote();
+                            updateCurrentInfoSection(stockQuote);
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            new Handler(StockActivity.this.getMainLooper()).post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(StockActivity.this, "No data found", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+
+                    }
+                }.start();
+            }
+        });
+    }
+
+
 
     public String getStockSymbol(){
         return this.stockSymbol;

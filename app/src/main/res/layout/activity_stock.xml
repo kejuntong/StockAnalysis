@@ -50,7 +50,7 @@
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/line_chart"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="230dp"
         android:layout_below="@+id/title_bar"/>
 
     <RelativeLayout
@@ -86,7 +86,7 @@
             android:layout_below="@+id/market_info_title"
             android:layout_marginTop="7dp"
             android:layout_marginLeft="10dp"
-            android:text="Latest price (update every 5 seconds):"
+            android:text="Latest price:"
             android:textSize="15dp"
             android:textColor="@color/white"/>
 
@@ -99,6 +99,7 @@
             android:layout_marginLeft="10dp"
             android:text=""
             android:textSize="15dp"
+            android:textStyle="bold"
             android:textColor="@color/holo_blue_bright"/>
 
         <ImageView
@@ -127,14 +128,100 @@
             android:tint="@color/red"
             android:visibility="gone"/>
 
+        <ImageView
+            android:id="@+id/button_refresh"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/market_info_title"
+            android:padding="6dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="2dp"
+            android:src="@drawable/button_refresh"
+            android:tint="@color/white"/>
+
+        <ProgressBar
+            android:id="@+id/refresh_spinner"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/market_info_title"
+            android:padding="6dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="2dp"
+            android:visibility="invisible"/>
+
+        <TextView
+            android:id="@+id/last_update_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textStyle="italic"
+            android:textSize="13dp"
+            android:textColor="@color/white"
+            android:layout_alignBottom="@+id/latest_price_label"
+            android:layout_toLeftOf="@+id/button_refresh"/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/last_update_label"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="Last updated at: "-->
+            <!--android:textStyle="italic"-->
+            <!--android:textSize="13dp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:layout_alignBottom="@+id/latest_price_label"-->
+            <!--android:layout_toLeftOf="@+id/last_update_text"/>-->
+
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:layout_below="@+id/current_info_container"/>
+        android:layout_below="@+id/current_info_container">
+
+        <TextView
+            android:id="@+id/history_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="13dp"
+            android:text="History Info"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic"
+            android:textSize="17dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/history_info_title"
+            android:background="@color/blue"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:id="@+id/history_info_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/history_info_title"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Click any item below to view the momentum indicators based on a certain day:"
+            android:textColor="@color/white"
+            android:textSize="13dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:layout_below="@+id/history_info_description"/>
+
+    </RelativeLayout>
+
+
 
     <RelativeLayout
         android:id="@+id/loading_layer"
