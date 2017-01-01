@@ -23,15 +23,29 @@
             android:textColor="@color/white"
             android:textSize="35dp" />
 
+        <ImageButton
+            android:id="@+id/menu_button"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/selectable_button_background"
+            android:src="@drawable/button_context_menu"
+            android:tint="@color/white"
+            android:scaleType="centerInside"
+            android:padding="13dp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/white"
+            android:textSize="35dp" />
+
         <EditText
             android:id="@+id/search_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/wish_list_button"
-            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/menu_button"
             android:layout_centerVertical="true"
             android:background="@drawable/edit_text_underline_white"
-            android:hint="Enter company name or stock symbol"
+            android:hint="Enter company name / stock symbol"
             android:textColorHint="@color/transparent_white_percent_50"
             android:inputType="textCapCharacters"
             android:imeOptions="actionDone"
@@ -44,9 +58,9 @@
             android:id="@+id/cancel_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@+id/menu_button"
+            android:layout_marginRight="-8dp"
             android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
             android:background="@color/transparent"
             android:padding="5dp"
             android:scaleType="centerInside"
