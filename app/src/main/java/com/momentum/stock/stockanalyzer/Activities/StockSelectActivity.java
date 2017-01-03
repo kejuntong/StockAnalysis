@@ -102,7 +102,9 @@ public class StockSelectActivity extends Activity {
                 MaterialDialog.Builder builder = new MaterialDialog.Builder(StockSelectActivity.this)
                         .title("Search Category")
                         .titleColorRes(R.color.black)
-                        .items("Toronto Stock Exchange (TSE)", "Nasdaq Stock Market (NASDAQ)", "New York Stock Exchange (NYSE)")
+                        .items("Toronto Stock Exchange (TSX)", "Toronto Stock Exchange Venture (TSXV)",
+                                "Nasdaq Stock Market (NASDAQ)", "New York Stock Exchange (NYSE)",
+                                "Standard & Poor's 500 (S&P 500)")
                         .itemsColorRes(R.color.black)
                         .widgetColorRes(R.color.blue)
                         .positiveText("SELECT")
@@ -117,10 +119,16 @@ public class StockSelectActivity extends Activity {
                                         loadCompanyList("stock_list_tsx.csv");
                                         break;
                                     case 1:
-                                        loadCompanyList("stock_list_nasdaq.csv");
+                                        loadCompanyList("stock_list_tsxv.csv");
                                         break;
                                     case 2:
+                                        loadCompanyList("stock_list_nasdaq.csv");
+                                        break;
+                                    case 3:
                                         loadCompanyList("stock_list_nyse.csv");
+                                        break;
+                                    case 4:
+                                        loadCompanyList("stock_list_sp500.csv");
                                         break;
                                 }
 

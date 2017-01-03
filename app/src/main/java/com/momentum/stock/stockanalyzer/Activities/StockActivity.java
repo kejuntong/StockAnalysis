@@ -247,9 +247,6 @@ public class StockActivity extends Activity {
         List<Entry> entries = new ArrayList<Entry>();
         for (int i=0; i<historyList.size(); i++) {
             HistoricalQuote historicalQuote = historyList.get(historyList.size()-1-i);
-            long timeTest = historicalQuote.getDate().getTimeInMillis();
-            System.out.println("test time 1: " + timeTest);
-            System.out.println("test time 2: " + (float) timeTest);
             entries.add(new Entry(i, historicalQuote.getClose().floatValue()));
         }
 

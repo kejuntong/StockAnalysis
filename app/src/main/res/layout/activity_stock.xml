@@ -65,7 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="Market Info"
+            android:text="Latest Market Info"
             android:textColor="@color/white"
             android:textStyle="bold|italic"
             android:textSize="17dp"/>
@@ -186,7 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="13dp"
-            android:text="History Info"
+            android:text="Historical Data"
             android:textColor="@color/white"
             android:textStyle="bold|italic"
             android:textSize="17dp"/>
