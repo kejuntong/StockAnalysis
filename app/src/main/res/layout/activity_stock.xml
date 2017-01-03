@@ -162,16 +162,52 @@
             android:layout_alignBottom="@+id/latest_price_label"
             android:layout_toLeftOf="@+id/button_refresh"/>
 
-        <!--<TextView-->
-            <!--android:id="@+id/last_update_label"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:text="Last updated at: "-->
-            <!--android:textStyle="italic"-->
-            <!--android:textSize="13dp"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:layout_alignBottom="@+id/latest_price_label"-->
-            <!--android:layout_toLeftOf="@+id/last_update_text"/>-->
+        <TextView
+            android:id="@+id/latest_change_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/latest_price_label"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="10dp"
+            android:text="Change:"
+            android:textSize="15dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/latest_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/latest_change_label"
+            android:layout_toRightOf="@+id/latest_change_label"
+            android:layout_marginLeft="10dp"
+            android:text=""
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/holo_blue_bright"/>
+
+        <TextView
+            android:id="@+id/latest_volume_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/latest_price_label"
+            android:layout_marginTop="7dp"
+            android:layout_toLeftOf="@+id/latest_volume"
+            android:layout_marginRight="10dp"
+            android:text="Volume:"
+            android:textSize="15dp"
+            android:textColor="@color/white"/>
+
+        <TextView
+            android:id="@+id/latest_volume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/latest_change_label"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:text=""
+            android:textSize="15dp"
+            android:textStyle="bold"
+            android:textColor="@color/holo_blue_bright"/>
 
     </RelativeLayout>
 

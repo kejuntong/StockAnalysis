@@ -37,6 +37,7 @@ import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -65,6 +66,8 @@ public class StockActivity extends Activity {
     TextView lastUpdateText;
     ImageView refreshButton;
     ProgressBar refreshSpinner;
+    TextView priceChangeText;
+    TextView volumeText;
 
     String stockSymbol;
     String stockName;
@@ -115,6 +118,9 @@ public class StockActivity extends Activity {
         DateFormat dateFormat = new SimpleDateFormat("MMM.dd, HH:mm:ss", Locale.US);
         String strDate = dateFormat.format(date);
         lastUpdateText.setText(strDate);
+
+        priceChangeText = (TextView) findViewById(R.id.latest_change);
+        volumeText = (TextView) findViewById(R.id.latest_volume);
     }
 
     private void pullData(final String stockId){
@@ -177,18 +183,23 @@ public class StockActivity extends Activity {
             public void run() {
                 if (stockQuote.getChange().compareTo(BigDecimal.ZERO) > 0){
                     currentPriceText.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.green));
+                    priceChangeText.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.green));
                     upArrow.setVisibility(View.VISIBLE);
                     downArrow.setVisibility(View.GONE);
                 } else if (stockQuote.getChange().compareTo(BigDecimal.ZERO) < 0){
                     currentPriceText.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.red));
+                    priceChangeText.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.red));
                     downArrow.setVisibility(View.VISIBLE);
                     upArrow.setVisibility(View.GONE);
                 } else {
                     currentPriceText.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.holo_blue_bright));
+                    priceChangeText.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.holo_blue_bright));
                     downArrow.setVisibility(View.GONE);
                     upArrow.setVisibility(View.GONE);
                 }
                 currentPriceText.setText("" + stockQuote.getPrice());
+                priceChangeText.setText("" + stockQuote.getChange());
+                volumeText.setText("" + NumberFormat.getNumberInstance(Locale.US).format(stockQuote.getVolume()));
 
                 refreshButton.setVisibility(View.VISIBLE);
                 refreshSpinner.setVisibility(View.INVISIBLE);
