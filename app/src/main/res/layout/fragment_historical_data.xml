@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@color/black">
+
+        <ImageButton
+            android:id="@+id/back_button"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@color/transparent"
+            android:src="@drawable/selectable_back_button"
+            android:scaleType="centerInside"
+            android:padding="12dp"/>
+
+        <me.grantland.widget.AutofitTextView
+            android:id="@+id/title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:layout_marginLeft="60dp"
+            android:layout_marginRight="60dp"
+            android:layout_centerInParent="true"
+            android:text="stock name"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:fontFamily="sans-serif-medium"
+            android:textStyle="bold"
+            android:textSize="16dp"/>
+
+        <Button
+            android:id="@+id/favorite_button"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selectable_button_background"
+            android:layout_alignParentRight="true"
+            android:text="+"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/white"
+            android:textSize="35dp" />
+
+    </RelativeLayout>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/line_chart"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_below="@+id/title_bar"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/line_chart">
+
+        <TextView
+            android:id="@+id/history_info_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="13dp"
+            android:text="Historical Data"
+            android:textColor="@color/white"
+            android:textStyle="bold|italic"
+            android:textSize="17dp"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@+id/history_info_title"
+            android:background="@color/blue"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"/>
+
+        <TextView
+            android:id="@+id/history_info_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/history_info_title"
+            android:layout_marginTop="7dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="Click any item below to view the momentum indicators based on a certain day:"
+            android:textColor="@color/white"
+            android:textSize="13dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
+            android:layout_below="@+id/history_info_description"/>
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/loading_layer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <!--<lecho.lib.hellocharts.view.LineChartView-->
+    <!--android:id="@+id/chart"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="300dp"-->
+    <!--android:layout_centerInParent="true"/>-->
+
+</RelativeLayout>

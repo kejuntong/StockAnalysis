@@ -20,6 +20,8 @@
 
         <activity android:name="com.momentum.stock.stockanalyzer.Activities.StockSelectActivity" android:screenOrientation="portrait"/>
 
+        <activity android:name="com.momentum.stock.stockanalyzer.Activities.HomeActivity" android:screenOrientation="portrait"/>
+
         <activity android:name="com.momentum.stock.stockanalyzer.Activities.StockActivity" android:screenOrientation="portrait"/>
 
         <activity android:name="com.momentum.stock.stockanalyzer.Activities.StockDetailActivity" android:screenOrientation="portrait"/>

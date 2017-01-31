@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.momentum.stock.stockanalyzer.Activities.HomeActivity;
 import com.momentum.stock.stockanalyzer.Activities.StockActivity;
 import com.momentum.stock.stockanalyzer.Models.Company;
 import com.momentum.stock.stockanalyzer.R;
@@ -67,7 +68,7 @@ public class StockSelectAdapter extends
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(mContext, StockActivity.class);
+                Intent intent = new Intent(mContext, HomeActivity.class);
                 intent.putExtra("symbol", itemList.get(position).getSymbol());
                 intent.putExtra("name", itemList.get(position).getName());
                 mContext.startActivity(intent);
