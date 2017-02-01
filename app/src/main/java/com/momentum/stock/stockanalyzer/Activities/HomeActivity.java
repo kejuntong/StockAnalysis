@@ -24,6 +24,9 @@ public class HomeActivity extends Activity {
     RelativeLayout buttonFirst;
     RelativeLayout buttonSecond;
     RelativeLayout buttonThird;
+    RelativeLayout indicatorFirst;
+    RelativeLayout indicatorSecond;
+    RelativeLayout indicatorThird;
 
     ImageView buttonImageFirst;
     ImageView buttonImageSecond;
@@ -47,6 +50,9 @@ public class HomeActivity extends Activity {
         buttonFirst = (RelativeLayout) findViewById(R.id.first_button);
         buttonSecond = (RelativeLayout) findViewById(R.id.second_button);
         buttonThird = (RelativeLayout) findViewById(R.id.third_button);
+        indicatorFirst = (RelativeLayout) findViewById(R.id.indicator_first);
+        indicatorSecond = (RelativeLayout) findViewById(R.id.indicator_second);
+        indicatorThird = (RelativeLayout) findViewById(R.id.indicator_third);
 
         buttonImageFirst = (ImageView) findViewById(R.id.first_image);
         buttonImageSecond = (ImageView) findViewById(R.id.second_image);
@@ -55,7 +61,8 @@ public class HomeActivity extends Activity {
         buttonFirst.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonImageFirst.setAlpha(1.0f);
+//                buttonImageFirst.setAlpha(1.0f);
+                setIndicator(Constants.DAY_DATA_FRAGMENT);
                 if (dayDataFragment == null) {
                     dayDataFragment = new DayDataFragment();
                 }
@@ -67,7 +74,8 @@ public class HomeActivity extends Activity {
         buttonSecond.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonImageSecond.setAlpha(1.0f);
+//                buttonImageSecond.setAlpha(1.0f);
+                setIndicator(Constants.HISTORICAL_DATA_FRAGMENT);
                 if (historicalDataFragment == null) {
                     historicalDataFragment = new HistoricalDataFragment();
                 }
@@ -78,13 +86,20 @@ public class HomeActivity extends Activity {
         buttonThird.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                buttonImageThird.setAlpha(1.0f);
+//                buttonImageThird.setAlpha(1.0f);
+                setIndicator(Constants.INDICATORS_FRAGMENT);
                 if (indicatorsFragment == null){
                     indicatorsFragment = new IndicatorsFragment();
                 }
                 switchFragment(indicatorsFragment);
             }
         });
+
+
+        // load the first fragment by default
+        setIndicator(Constants.DAY_DATA_FRAGMENT);
+        dayDataFragment = new DayDataFragment();
+        switchFragment(dayDataFragment);
 
     }
 
@@ -124,6 +139,35 @@ public class HomeActivity extends Activity {
 
         txn.commit();
         getFragmentManager().executePendingTransactions();
+    }
+
+    private void setIndicator(String name){
+        switch (name){
+            case Constants.DAY_DATA_FRAGMENT:
+                indicatorFirst.setVisibility(View.VISIBLE);
+                indicatorSecond.setVisibility(View.INVISIBLE);
+                indicatorThird.setVisibility(View.INVISIBLE);
+                buttonImageFirst.setAlpha(1.0f);
+                buttonImageSecond.setAlpha(0.5f);
+                buttonImageThird.setAlpha(0.5f);
+                break;
+            case Constants.HISTORICAL_DATA_FRAGMENT:
+                indicatorFirst.setVisibility(View.INVISIBLE);
+                indicatorSecond.setVisibility(View.VISIBLE);
+                indicatorThird.setVisibility(View.INVISIBLE);
+                buttonImageFirst.setAlpha(0.5f);
+                buttonImageSecond.setAlpha(1.0f);
+                buttonImageThird.setAlpha(0.5f);
+                break;
+            case Constants.INDICATORS_FRAGMENT:
+                indicatorFirst.setVisibility(View.INVISIBLE);
+                indicatorSecond.setVisibility(View.INVISIBLE);
+                indicatorThird.setVisibility(View.VISIBLE);
+                buttonImageFirst.setAlpha(0.5f);
+                buttonImageSecond.setAlpha(0.5f);
+                buttonImageThird.setAlpha(1.0f);
+                break;
+        }
     }
 
     public String getSelectedStockSymbol(){

@@ -198,7 +198,7 @@ public class StockActivity extends Activity {
                     upArrow.setVisibility(View.GONE);
                 }
                 currentPriceText.setText("" + stockQuote.getPrice());
-                priceChangeText.setText("" + stockQuote.getChange());
+                priceChangeText.setText("" + stockQuote.getChangeInPercent() + "%");
                 volumeText.setText("" + NumberFormat.getNumberInstance(Locale.US).format(stockQuote.getVolume()));
 
                 refreshButton.setVisibility(View.VISIBLE);

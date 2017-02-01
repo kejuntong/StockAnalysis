@@ -1,15 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/black">
+
+    <LinearLayout
+        android:id="@+id/indicator_container"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:orientation="horizontal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparent_white_percent_90">
+
+        <RelativeLayout
+            android:id="@+id/indicator_first"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/holo_blue_bright"/>
+
+        <RelativeLayout
+            android:id="@+id/indicator_second"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/holo_blue_bright"
+            android:visibility="invisible"/>
+
+        <RelativeLayout
+            android:id="@+id/indicator_third"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/holo_blue_bright"
+            android:visibility="invisible"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/button_container"
         android:baselineAligned="false"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:layout_alignParentBottom="true"
-        android:background="@color/transparent_black_percent_20"
+        android:layout_above="@id/indicator_container"
+        android:background="@color/transparent_white_percent_90"
         android:orientation="horizontal">
 
         <RelativeLayout
@@ -21,10 +55,11 @@
             <ImageView
                 android:id="@+id/first_image"
                 android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_height="33dp"
                 android:layout_centerInParent="true"
                 android:alpha="0.5"
-                android:src="@drawable/app_icon_1"/>
+                android:tint="@color/black"
+                android:src="@drawable/tab_day_data"/>
 
         </RelativeLayout>
 
@@ -37,10 +72,11 @@
             <ImageView
                 android:id="@+id/second_image"
                 android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_height="31dp"
                 android:layout_centerInParent="true"
                 android:alpha="0.5"
-                android:src="@drawable/app_icon_1"/>
+                android:tint="@color/black"
+                android:src="@drawable/tab_historical_data"/>
 
         </RelativeLayout>
 
@@ -52,11 +88,13 @@
 
             <ImageView
                 android:id="@+id/third_image"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitXY"
                 android:layout_centerInParent="true"
                 android:alpha="0.5"
-                android:src="@drawable/app_icon_1"/>
+                android:tint="@color/black"
+                android:src="@drawable/tab_indicator"/>
 
         </RelativeLayout>
 
