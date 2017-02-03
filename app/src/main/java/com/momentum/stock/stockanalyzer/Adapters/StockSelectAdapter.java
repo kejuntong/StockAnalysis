@@ -12,6 +12,8 @@ import com.momentum.stock.stockanalyzer.Activities.HomeActivity;
 import com.momentum.stock.stockanalyzer.Activities.StockActivity;
 import com.momentum.stock.stockanalyzer.Models.Company;
 import com.momentum.stock.stockanalyzer.R;
+import com.momentum.stock.stockanalyzer.UtilClasses.CallbackInterface;
+import com.momentum.stock.stockanalyzer.UtilClasses.OnItemClickedCallbackInterface;
 
 import java.util.ArrayList;
 
@@ -25,6 +27,8 @@ public class StockSelectAdapter extends
     LayoutInflater mInflater;
 
     ArrayList<Company> itemList;
+
+    OnItemClickedCallbackInterface onItemLongClickListener;
 
     public StockSelectAdapter(Context context, ArrayList<Company> itemList){
         this.mContext = context;
@@ -74,6 +78,18 @@ public class StockSelectAdapter extends
                 mContext.startActivity(intent);
             }
         });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+
+                if (onItemLongClickListener != null){
+                    onItemLongClickListener.onCallback(view, position, itemList.get(position));
+                }
+
+                return true;
+            }
+        });
     }
 
     @Override
@@ -81,6 +97,9 @@ public class StockSelectAdapter extends
         return itemList.size();
     }
 
+    public void setOnItemLongClickListener(OnItemClickedCallbackInterface cbi){
+        this.onItemLongClickListener = cbi;
+    }
 }
 
 
