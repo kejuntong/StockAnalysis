@@ -227,7 +227,7 @@ public class StockActivity extends Activity {
         description.setTextColor(ContextCompat.getColor(StockActivity.this, R.color.yellow));
         lineChart.setDescription(description);
 
-        MyMarkerView mv = new MyMarkerView(this, R.layout.view_my_marker);
+        MyMarkerView mv = new MyMarkerView(this, R.layout.view_my_marker, historyList);
         mv.setChartView(lineChart); // For bounds control
         lineChart.setMarker(mv); // Set the marker to the chart
 

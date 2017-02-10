@@ -12,11 +12,11 @@ import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
  * Created by kevintong on 2017-01-31.
  */
 
-public class IndicatorsFragment extends BaseFragment {
+public class HomeThirdFragment extends BaseFragment {
 
     View fragmentView;
 
-    public IndicatorsFragment(){
+    public HomeThirdFragment(){
         setFragmentName(Constants.INDICATORS_FRAGMENT);
     }
 

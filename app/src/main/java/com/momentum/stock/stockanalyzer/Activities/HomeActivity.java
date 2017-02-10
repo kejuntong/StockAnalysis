@@ -9,9 +9,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.momentum.stock.stockanalyzer.Fragments.BaseFragment;
-import com.momentum.stock.stockanalyzer.Fragments.DayDataFragment;
-import com.momentum.stock.stockanalyzer.Fragments.HistoricalDataFragment;
-import com.momentum.stock.stockanalyzer.Fragments.IndicatorsFragment;
+import com.momentum.stock.stockanalyzer.Fragments.HomeFirstFragment;
+import com.momentum.stock.stockanalyzer.Fragments.HomeSecondFragment;
+import com.momentum.stock.stockanalyzer.Fragments.HomeThirdFragment;
 import com.momentum.stock.stockanalyzer.R;
 import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
 
@@ -32,9 +32,9 @@ public class HomeActivity extends Activity {
     ImageView buttonImageSecond;
     ImageView buttonImageThird;
 
-    DayDataFragment dayDataFragment;
-    HistoricalDataFragment historicalDataFragment;
-    IndicatorsFragment indicatorsFragment;
+    HomeFirstFragment homeFirstFragment;
+    HomeSecondFragment homeSecondFragment;
+    HomeThirdFragment homeThirdFragment;
 
     String selectedStockSymbol;
     String selectedStockName;
@@ -63,10 +63,10 @@ public class HomeActivity extends Activity {
             public void onClick(View view) {
 //                buttonImageFirst.setAlpha(1.0f);
                 setIndicator(Constants.DAY_DATA_FRAGMENT);
-                if (dayDataFragment == null) {
-                    dayDataFragment = new DayDataFragment();
+                if (homeFirstFragment == null) {
+                    homeFirstFragment = new HomeFirstFragment();
                 }
-                switchFragment(dayDataFragment);
+                switchFragment(homeFirstFragment);
 
             }
         });
@@ -76,10 +76,10 @@ public class HomeActivity extends Activity {
             public void onClick(View view) {
 //                buttonImageSecond.setAlpha(1.0f);
                 setIndicator(Constants.HISTORICAL_DATA_FRAGMENT);
-                if (historicalDataFragment == null) {
-                    historicalDataFragment = new HistoricalDataFragment();
+                if (homeSecondFragment == null) {
+                    homeSecondFragment = new HomeSecondFragment();
                 }
-                switchFragment(historicalDataFragment);
+                switchFragment(homeSecondFragment);
             }
         });
 
@@ -88,18 +88,18 @@ public class HomeActivity extends Activity {
             public void onClick(View view) {
 //                buttonImageThird.setAlpha(1.0f);
                 setIndicator(Constants.INDICATORS_FRAGMENT);
-                if (indicatorsFragment == null){
-                    indicatorsFragment = new IndicatorsFragment();
+                if (homeThirdFragment == null){
+                    homeThirdFragment = new HomeThirdFragment();
                 }
-                switchFragment(indicatorsFragment);
+                switchFragment(homeThirdFragment);
             }
         });
 
 
         // load the first fragment by default
         setIndicator(Constants.DAY_DATA_FRAGMENT);
-        dayDataFragment = new DayDataFragment();
-        switchFragment(dayDataFragment);
+        homeFirstFragment = new HomeFirstFragment();
+        switchFragment(homeFirstFragment);
 
     }
 

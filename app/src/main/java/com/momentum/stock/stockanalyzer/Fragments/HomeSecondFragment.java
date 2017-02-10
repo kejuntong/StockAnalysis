@@ -57,7 +57,7 @@ import yahoofinance.quotes.stock.StockQuote;
  * Created by kevintong on 2017-01-31.
  */
 
-public class HistoricalDataFragment extends BaseFragment {
+public class HomeSecondFragment extends BaseFragment {
 
     View fragmentView;
 
@@ -75,7 +75,7 @@ public class HistoricalDataFragment extends BaseFragment {
 
     Handler mainThreadHandler;
 
-    public HistoricalDataFragment(){
+    public HomeSecondFragment(){
         setFragmentName(Constants.HISTORICAL_DATA_FRAGMENT);
     }
 
@@ -181,7 +181,7 @@ public class HistoricalDataFragment extends BaseFragment {
         description.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
         lineChart.setDescription(description);
 
-        MyMarkerView mv = new MyMarkerView(getActivity(), R.layout.view_my_marker);
+        MyMarkerView mv = new MyMarkerView(getActivity(), R.layout.view_my_marker, historyList);
         mv.setChartView(lineChart); // For bounds control
         lineChart.setMarker(mv); // Set the marker to the chart
 

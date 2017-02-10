@@ -57,15 +57,15 @@ import yahoofinance.quotes.stock.StockQuote;
  * Created by kevintong on 2017-01-31.
  */
 
-public class DayDataFragment extends BaseFragment {
+public class HomeFirstFragment extends BaseFragment {
 
     View fragmentView;
 
     TextView titleText;
     Button favoriteButton;
 
-    RecyclerView mRecyclerView;
-    StockHistoryAdapter mAdapter;
+//    RecyclerView mRecyclerView;
+//    StockHistoryAdapter mAdapter;
     ArrayList<HistoricalQuote> historyList;
 
     TextView currentPriceText;
@@ -74,8 +74,12 @@ public class DayDataFragment extends BaseFragment {
     TextView lastUpdateText;
     ImageView refreshButton;
     ProgressBar refreshSpinner;
-    TextView priceChangeText;
+    TextView changePercentageText;
+    TextView changeValueText;
+    TextView openPriceText;
     TextView volumeText;
+    TextView dayHighText;
+    TextView dayLowText;
 
     String stockSymbol;
     String stockName;
@@ -84,7 +88,7 @@ public class DayDataFragment extends BaseFragment {
 
     Handler mainThreadHandler;
 
-    public DayDataFragment(){
+    public HomeFirstFragment(){
         setFragmentName(Constants.DAY_DATA_FRAGMENT);
     }
 
@@ -121,12 +125,7 @@ public class DayDataFragment extends BaseFragment {
     }
 
     private void initViews(){
-        mRecyclerView = (RecyclerView) fragmentView.findViewById(R.id.recycler_view);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        mRecyclerView.setLayoutManager(linearLayoutManager);
         historyList = new ArrayList<>();
-        mAdapter = new StockHistoryAdapter(getActivity(), historyList);
-        mRecyclerView.setAdapter(mAdapter);
 
         currentPriceText = (TextView) fragmentView.findViewById(R.id.latest_price);
         upArrow = (ImageView) fragmentView.findViewById(R.id.arrow_image_up);
@@ -137,8 +136,12 @@ public class DayDataFragment extends BaseFragment {
         String strDate = dateFormat.format(date);
         lastUpdateText.setText(strDate);
 
-        priceChangeText = (TextView) fragmentView.findViewById(R.id.latest_change);
+        changePercentageText = (TextView) fragmentView.findViewById(R.id.latest_change_percentage);
         volumeText = (TextView) fragmentView.findViewById(R.id.latest_volume);
+        changeValueText = (TextView) fragmentView.findViewById(R.id.latest_change_value);
+        openPriceText = (TextView) fragmentView.findViewById(R.id.latest_open_price);
+        dayHighText = (TextView) fragmentView.findViewById(R.id.latest_day_high);
+        dayLowText = (TextView) fragmentView.findViewById(R.id.latest_day_low);
     }
 
     private void pullData(final String stockId){
@@ -171,7 +174,6 @@ public class DayDataFragment extends BaseFragment {
                     mainThreadHandler.post(new Runnable() {
                         @Override
                         public void run() {
-                            mAdapter.notifyDataSetChanged();
                             fragmentView.findViewById(R.id.loading_layer).setVisibility(View.GONE);
 
                             setLineChart();
@@ -201,23 +203,30 @@ public class DayDataFragment extends BaseFragment {
             public void run() {
                 if (stockQuote.getChange().compareTo(BigDecimal.ZERO) > 0){
                     currentPriceText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
-                    priceChangeText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                    changePercentageText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                    changeValueText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
                     upArrow.setVisibility(View.VISIBLE);
                     downArrow.setVisibility(View.GONE);
                 } else if (stockQuote.getChange().compareTo(BigDecimal.ZERO) < 0){
                     currentPriceText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
-                    priceChangeText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                    changePercentageText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                    changeValueText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
                     downArrow.setVisibility(View.VISIBLE);
                     upArrow.setVisibility(View.GONE);
                 } else {
                     currentPriceText.setTextColor(ContextCompat.getColor(getActivity(), R.color.holo_blue_bright));
-                    priceChangeText.setTextColor(ContextCompat.getColor(getActivity(), R.color.holo_blue_bright));
+                    changePercentageText.setTextColor(ContextCompat.getColor(getActivity(), R.color.holo_blue_bright));
+                    changePercentageText.setTextColor(ContextCompat.getColor(getActivity(), R.color.holo_blue_bright));
                     downArrow.setVisibility(View.GONE);
                     upArrow.setVisibility(View.GONE);
                 }
                 currentPriceText.setText("" + stockQuote.getPrice());
-                priceChangeText.setText("" + stockQuote.getChangeInPercent() + "%");
+                changePercentageText.setText("" + stockQuote.getChangeInPercent() + "%");
                 volumeText.setText("" + NumberFormat.getNumberInstance(Locale.US).format(stockQuote.getVolume()));
+                changeValueText.setText("" + stockQuote.getChange());
+                openPriceText.setText("" + stockQuote.getOpen());
+                dayHighText.setText("" + stockQuote.getDayHigh());
+                dayLowText.setText("" + stockQuote.getDayLow());
 
                 refreshButton.setVisibility(View.VISIBLE);
                 refreshSpinner.setVisibility(View.INVISIBLE);
@@ -245,7 +254,7 @@ public class DayDataFragment extends BaseFragment {
         description.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
         lineChart.setDescription(description);
 
-        MyMarkerView mv = new MyMarkerView(getActivity(), R.layout.view_my_marker);
+        MyMarkerView mv = new MyMarkerView(getActivity(), R.layout.view_my_marker, historyList);
         mv.setChartView(lineChart); // For bounds control
         lineChart.setMarker(mv); // Set the marker to the chart
 
