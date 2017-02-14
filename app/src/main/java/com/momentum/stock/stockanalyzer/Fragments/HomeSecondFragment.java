@@ -82,7 +82,12 @@ public class HomeSecondFragment extends BaseFragment {
 
         initViews();
 
-        pullData(stockSymbol);
+        historyList.clear();
+        for (HistoricalQuote item : ((HomeActivity) getActivity()).getInitialDataList()) {
+            historyList.add(item);
+        }
+        mAdapter.notifyDataSetChanged();
+//        pullData(stockSymbol);
 
     }
 
