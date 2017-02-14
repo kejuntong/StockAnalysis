@@ -118,17 +118,17 @@ public class StockHistoryAdapter extends
             holder.indicatorCircle.setImageResource(R.drawable.circle_white);
         }
 
-        // go to detail
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Global.getInstance().currentList = itemList.subList(position, itemList.size());
-                Intent intent = new Intent(mContext, StockDetailActivity.class);
-                intent.putExtra("symbol", ( (StockActivity) mContext).getStockSymbol());
-                intent.putExtra("name", ( (StockActivity) mContext).getStockName());
-                mContext.startActivity(intent);
-            }
-        });
+//        // go to detail
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Global.getInstance().currentList = itemList.subList(position, itemList.size());
+//                Intent intent = new Intent(mContext, StockDetailActivity.class);
+//                intent.putExtra("symbol", ( (StockActivity) mContext).getStockSymbol());
+//                intent.putExtra("name", ( (StockActivity) mContext).getStockName());
+//                mContext.startActivity(intent);
+//            }
+//        });
 
     }
 

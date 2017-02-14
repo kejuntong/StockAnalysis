@@ -5,10 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +28,6 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.momentum.stock.stockanalyzer.Activities.HomeActivity;
-import com.momentum.stock.stockanalyzer.Adapters.StockHistoryAdapter;
 import com.momentum.stock.stockanalyzer.CustomViews.MyMarkerView;
 import com.momentum.stock.stockanalyzer.R;
 import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
@@ -94,7 +90,7 @@ public class HomeFirstFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fragmentView = inflater.inflate(R.layout.fragment_current_day_data, container, false);
+        fragmentView = inflater.inflate(R.layout.fragment_home_first, container, false);
 
         return fragmentView;
     }
@@ -161,13 +157,8 @@ public class HomeFirstFragment extends BaseFragment {
                     updateCurrentInfoSection(stockQuote);
 
                     // history data
-                    Calendar calendarFrom = Calendar.getInstance();
-                    calendarFrom.add(Calendar.MONTH, -2);
-                    calendarFrom.set(Calendar.DATE, 1);
-                    Calendar calendarTo = Calendar.getInstance();
-                    List<HistoricalQuote> list = stock.getHistory(calendarFrom, calendarTo, Interval.DAILY);
                     historyList.clear();
-                    for (HistoricalQuote item : list){
+                    for (HistoricalQuote item : ((HomeActivity) getActivity()).getInitialDataList()) {
                         historyList.add(item);
                     }
 

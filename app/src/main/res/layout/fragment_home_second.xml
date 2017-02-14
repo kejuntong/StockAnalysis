@@ -23,7 +23,7 @@
             android:id="@+id/title_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:singleLine="true"
+            android:maxLines="1"
             android:layout_marginLeft="60dp"
             android:layout_marginRight="60dp"
             android:layout_centerInParent="true"
@@ -47,50 +47,11 @@
 
     </RelativeLayout>
 
-    <com.github.mikephil.charting.charts.LineChart
-        android:id="@+id/line_chart"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:layout_below="@+id/title_bar"/>
-
-
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/line_chart">
-
-        <TextView
-            android:id="@+id/history_info_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="13dp"
-            android:text="Historical Data"
-            android:textColor="@color/white"
-            android:textStyle="bold|italic"
-            android:textSize="17dp"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_below="@+id/history_info_title"
-            android:background="@color/blue"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="3dp"/>
-
-        <TextView
-            android:id="@+id/history_info_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/history_info_title"
-            android:layout_marginTop="7dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Click any item below to view the momentum indicators based on a certain day:"
-            android:textColor="@color/white"
-            android:textSize="13dp"/>
+        android:layout_below="@+id/title_bar">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
@@ -100,8 +61,6 @@
             android:layout_below="@+id/history_info_description"/>
 
     </RelativeLayout>
-
-
 
     <RelativeLayout
         android:id="@+id/loading_layer"

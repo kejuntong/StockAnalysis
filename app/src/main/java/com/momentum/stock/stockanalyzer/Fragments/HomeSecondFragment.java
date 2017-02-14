@@ -5,53 +5,31 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.AxisBase;
-import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
-import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.momentum.stock.stockanalyzer.Activities.HomeActivity;
 import com.momentum.stock.stockanalyzer.Adapters.StockHistoryAdapter;
-import com.momentum.stock.stockanalyzer.CustomViews.MyMarkerView;
 import com.momentum.stock.stockanalyzer.R;
 import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.text.DateFormat;
-import java.text.NumberFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import yahoofinance.Stock;
 import yahoofinance.YahooFinance;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
-import yahoofinance.quotes.stock.StockQuote;
 
 /**
  * Created by kevintong on 2017-01-31.
@@ -71,8 +49,6 @@ public class HomeSecondFragment extends BaseFragment {
     String stockSymbol;
     String stockName;
 
-    LineChart lineChart;
-
     Handler mainThreadHandler;
 
     public HomeSecondFragment(){
@@ -81,7 +57,7 @@ public class HomeSecondFragment extends BaseFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        fragmentView = inflater.inflate(R.layout.fragment_historical_data, container, false);
+        fragmentView = inflater.inflate(R.layout.fragment_home_second, container, false);
 
         return fragmentView;
     }
@@ -148,8 +124,6 @@ public class HomeSecondFragment extends BaseFragment {
                             mAdapter.notifyDataSetChanged();
                             fragmentView.findViewById(R.id.loading_layer).setVisibility(View.GONE);
 
-                            setLineChart();
-
                         }
                     });
 
@@ -167,70 +141,6 @@ public class HomeSecondFragment extends BaseFragment {
         };
 
         thread.start();
-    }
-
-    public void setLineChart(){
-        lineChart = (LineChart) fragmentView.findViewById(R.id.line_chart);
-
-        lineChart.setTouchEnabled(true);
-        lineChart.setDragEnabled(true);
-        lineChart.setScaleEnabled(true);
-        lineChart.setPinchZoom(true);
-        Description description = new Description();
-        description.setText("data retrieved from Yahoo Finance");
-        description.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
-        lineChart.setDescription(description);
-
-        MyMarkerView mv = new MyMarkerView(getActivity(), R.layout.view_my_marker, historyList);
-        mv.setChartView(lineChart); // For bounds control
-        lineChart.setMarker(mv); // Set the marker to the chart
-
-        XAxis xAxis = lineChart.getXAxis();
-//        xAxis.setPosition(XAxis.XAxisPosition.BOTH_SIDED);
-//        xAxis.setAxisMinimum(0f);
-//        xAxis.setGranularity(1f);
-        xAxis.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
-        xAxis.setValueFormatter(new IAxisValueFormatter() {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-
-                HistoricalQuote historicalQuote = historyList.get(historyList.size() - 1 -(int)value);
-                Date date = historicalQuote.getDate().getTime();
-                DateFormat dateFormat = new SimpleDateFormat("MMM.dd", Locale.US);
-                return dateFormat.format(date);
-            }
-        });
-
-        YAxis yAxisLeft = lineChart.getAxisLeft();
-        YAxis yAxisRight = lineChart.getAxisRight();
-        yAxisLeft.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
-        yAxisRight.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
-
-        Legend legend = lineChart.getLegend();
-        legend.setTextColor(ContextCompat.getColor(getActivity(), R.color.yellow));
-
-        List<Entry> entries = new ArrayList<Entry>();
-        for (int i=0; i<historyList.size(); i++) {
-            HistoricalQuote historicalQuote = historyList.get(historyList.size()-1-i);
-            entries.add(new Entry(i, historicalQuote.getClose().floatValue()));
-        }
-
-        LineDataSet dataSet = new LineDataSet(entries, "Close Price"); // add entries to dataset
-        dataSet.enableDashedLine(10f, 5f, 0f);
-        dataSet.enableDashedHighlightLine(10f, 5f, 0f);
-        dataSet.setColor(ContextCompat.getColor(getActivity(), R.color.orange));
-        dataSet.setCircleColor(ContextCompat.getColor(getActivity(), R.color.holo_blue_bright));
-        dataSet.setLineWidth(1f);
-        dataSet.setCircleRadius(3f);
-        dataSet.setDrawCircleHole(false);
-        dataSet.setDrawValues(false);
-//        dataSet.setValueTextSize(9f);
-//        dataSet.setValueTextColor(ContextCompat.getColor(getActivity(), R.color.red));
-        dataSet.setDrawFilled(true);
-
-        LineData lineData = new LineData(dataSet);
-        lineChart.setData(lineData);
-        lineChart.invalidate(); // refresh
     }
 
     private void setFavoriteButton(){
