@@ -1,5 +1,7 @@
 package com.momentum.stock.stockanalyzer.UtilClasses;
 
+import android.content.res.Resources;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,5 +21,13 @@ public class Global {
     }
 
     public List<HistoricalQuote> currentList = new ArrayList<>();
+
+    public static int dpToPx(int dp){
+        return (int) (dp * Resources.getSystem().getDisplayMetrics().density);
+    }
+
+    public static int pxToDp(int px){
+        return (int) (px / Resources.getSystem().getDisplayMetrics().density);
+    }
 
 }

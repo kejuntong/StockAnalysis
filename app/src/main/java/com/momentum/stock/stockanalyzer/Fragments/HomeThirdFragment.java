@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.momentum.stock.stockanalyzer.Activities.HomeActivity;
+import com.momentum.stock.stockanalyzer.CustomViews.CustomColorBarIndicator;
 import com.momentum.stock.stockanalyzer.R;
 import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
 import com.momentum.stock.stockanalyzer.UtilClasses.Global;
@@ -59,6 +60,7 @@ public class HomeThirdFragment extends BaseFragment {
     TextView titleTextView;
     TextView sectionOneTitle;
     Button favoriteButton;
+    CustomColorBarIndicator rsiIndicator;
 
     List<HistoricalQuote> currentList;
     ArrayList<BigDecimal> gainList;
@@ -117,6 +119,7 @@ public class HomeThirdFragment extends BaseFragment {
         avgLossText = (TextView) fragmentView.findViewById(R.id.avg_loss);
         rsText = (TextView) fragmentView.findViewById(R.id.rs);
         rsiText = (TextView) fragmentView.findViewById(R.id.rsi);
+        rsiIndicator = (CustomColorBarIndicator) fragmentView.findViewById(R.id.indicator_rsi);
         sokText = (TextView) fragmentView.findViewById(R.id.sok);
         sodText = (TextView) fragmentView.findViewById(R.id.sod);
         williamsRText = (TextView) fragmentView.findViewById(R.id.william_r);
@@ -202,6 +205,10 @@ public class HomeThirdFragment extends BaseFragment {
             }
             rsText.setText(String.valueOf(rs.setScale(2, BigDecimal.ROUND_HALF_UP)));
             rsiText.setText(String.valueOf(rsi.setScale(2, BigDecimal.ROUND_HALF_UP)));
+
+            rsiIndicator.setLinePosition(80, 20, rsi.doubleValue());
+
+
         } else {
             rsText.setText("N/A");
             rsiText.setText("N/A");
@@ -316,7 +323,7 @@ public class HomeThirdFragment extends BaseFragment {
                     fourteenDaysMfi.compareTo(BigDecimal.valueOf(90)) > 0) {
                 signalText.setText("strong sell");
             }
-            else if (rsi.compareTo(BigDecimal.valueOf(020)) < 0 &&
+            else if (rsi.compareTo(BigDecimal.valueOf(20)) < 0 &&
                     sokValue.compareTo(BigDecimal.valueOf(0.2)) < 0 &&
                     sodValue.compareTo(BigDecimal.valueOf(0.2)) < 0 &&
                     williams.abs().compareTo(BigDecimal.valueOf(0.2)) > 0 &&
