@@ -347,14 +347,14 @@
                 android:background="@color/blue"
                 android:layout_marginTop="3dp"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_marginTop="8dp">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/rsi_tag"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:textSize="15dp"
@@ -363,28 +363,39 @@
 
                 <TextView
                     android:id="@+id/rsi"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/rsi_tag"
                     android:textSize="15dp"
                     android:text="10.00000"
                     android:textColor="@color/holo_blue_bright"/>
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/rsi_signal_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"/>
+
+            </RelativeLayout>
 
             <com.momentum.stock.stockanalyzer.CustomViews.CustomColorBarIndicator
                 android:id="@+id/indicator_rsi"
                 android:layout_width="200dp"
-                android:layout_height="24dp"
-                android:layout_marginTop="10dp"/>
+                android:layout_height="20dp"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/mfi_tag"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:textSize="15dp"
@@ -393,22 +404,39 @@
 
                 <TextView
                     android:id="@+id/fourteen_days_mfi"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/mfi_tag"
                     android:textSize="15dp"
                     android:text="10.00000"
                     android:textColor="@color/holo_blue_bright"/>
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/mfi_signal_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+            </RelativeLayout>
+
+            <com.momentum.stock.stockanalyzer.CustomViews.CustomColorBarIndicator
+                android:id="@+id/indicator_mfi"
+                android:layout_width="200dp"
+                android:layout_height="20dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/sok_tag"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:textSize="15dp"
@@ -417,22 +445,39 @@
 
                 <TextView
                     android:id="@+id/sok"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/sok_tag"
                     android:textSize="15dp"
                     android:text="10.00000"
                     android:textColor="@color/holo_blue_bright"/>
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/sok_signal_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+            </RelativeLayout>
+
+            <com.momentum.stock.stockanalyzer.CustomViews.CustomColorBarIndicator
+                android:id="@+id/indicator_sok"
+                android:layout_width="200dp"
+                android:layout_height="20dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/sod_tag"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:textSize="15dp"
@@ -441,22 +486,39 @@
 
                 <TextView
                     android:id="@+id/sod"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/sod_tag"
                     android:textSize="15dp"
                     android:text="10.00000"
                     android:textColor="@color/holo_blue_bright"/>
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/sod_signal_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15dp"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+            </RelativeLayout>
+
+            <com.momentum.stock.stockanalyzer.CustomViews.CustomColorBarIndicator
+                android:id="@+id/indicator_sod"
+                android:layout_width="200dp"
+                android:layout_height="20dp"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/william_tag"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-medium"
                     android:textSize="15dp"
@@ -465,38 +527,31 @@
 
                 <TextView
                     android:id="@+id/william_r"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/william_tag"
                     android:textSize="15dp"
                     android:text="10.00000"
                     android:textColor="@color/holo_blue_bright"/>
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp"
-                android:visibility="gone">
-
                 <TextView
-                    android:layout_width="match_parent"
+                    android:id="@+id/william_signal_text"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
                     android:fontFamily="sans-serif-medium"
                     android:textSize="15dp"
-                    android:text="MFI Raw Money Flow: "
+                    android:text=""
+                    android:textAllCaps="true"
                     android:textColor="@color/white"/>
 
-                <TextView
-                    android:id="@+id/mfi"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="10.00000"
-                    android:textColor="@color/holo_blue_bright"/>
+            </RelativeLayout>
 
-            </LinearLayout>
+            <com.momentum.stock.stockanalyzer.CustomViews.CustomColorBarIndicator
+                android:id="@+id/indicator_william"
+                android:layout_width="200dp"
+                android:layout_height="20dp"/>
 
             <TextView
                 android:layout_width="match_parent"

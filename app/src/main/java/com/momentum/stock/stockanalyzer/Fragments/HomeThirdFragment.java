@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,17 +51,25 @@ public class HomeThirdFragment extends BaseFragment {
     TextView avgLossText;
     TextView rsText;
     TextView rsiText;
+    TextView rsiSignalText;
     TextView sokText;
+    TextView sokSignalText;
     TextView sodText;
+    TextView sodSignalText;
     TextView williamsRText;
+    TextView williamsRSignalText;
     TextView mfiText;
-    TextView fourteenDaysMifText;
+    TextView mfiSignalText;
     TextView signalText;
 
     TextView titleTextView;
     TextView sectionOneTitle;
     Button favoriteButton;
     CustomColorBarIndicator rsiIndicator;
+    CustomColorBarIndicator sokIndicator;
+    CustomColorBarIndicator sodIndicator;
+    CustomColorBarIndicator williamIndicator;
+    CustomColorBarIndicator mfiIndicator;
 
     List<HistoricalQuote> currentList;
     ArrayList<BigDecimal> gainList;
@@ -118,13 +127,27 @@ public class HomeThirdFragment extends BaseFragment {
         avgGainText = (TextView) fragmentView.findViewById(R.id.avg_gain);
         avgLossText = (TextView) fragmentView.findViewById(R.id.avg_loss);
         rsText = (TextView) fragmentView.findViewById(R.id.rs);
+        
         rsiText = (TextView) fragmentView.findViewById(R.id.rsi);
+        rsiSignalText = (TextView) fragmentView.findViewById(R.id.rsi_signal_text);
         rsiIndicator = (CustomColorBarIndicator) fragmentView.findViewById(R.id.indicator_rsi);
+        
         sokText = (TextView) fragmentView.findViewById(R.id.sok);
+        sokSignalText = (TextView) fragmentView.findViewById(R.id.sok_signal_text);
+        sokIndicator = (CustomColorBarIndicator) fragmentView.findViewById(R.id.indicator_sok); 
+        
         sodText = (TextView) fragmentView.findViewById(R.id.sod);
+        sodSignalText = (TextView) fragmentView.findViewById(R.id.sod_signal_text);
+        sodIndicator = (CustomColorBarIndicator) fragmentView.findViewById(R.id.indicator_sod); 
+        
         williamsRText = (TextView) fragmentView.findViewById(R.id.william_r);
-        mfiText = (TextView) fragmentView.findViewById(R.id.mfi);
-        fourteenDaysMifText = (TextView) fragmentView.findViewById(R.id.fourteen_days_mfi);
+        williamsRSignalText = (TextView) fragmentView.findViewById(R.id.william_signal_text);
+        williamIndicator = (CustomColorBarIndicator) fragmentView.findViewById(R.id.indicator_william); 
+        
+        mfiText = (TextView) fragmentView.findViewById(R.id.fourteen_days_mfi);
+        mfiSignalText = (TextView) fragmentView.findViewById(R.id.mfi_signal_text);
+        mfiIndicator = (CustomColorBarIndicator) fragmentView.findViewById(R.id.indicator_mfi);
+
         signalText = (TextView) fragmentView.findViewById(R.id.signal);
 
         // open, high, low, close prices, and volume
@@ -206,8 +229,24 @@ public class HomeThirdFragment extends BaseFragment {
             rsText.setText(String.valueOf(rs.setScale(2, BigDecimal.ROUND_HALF_UP)));
             rsiText.setText(String.valueOf(rsi.setScale(2, BigDecimal.ROUND_HALF_UP)));
 
-            rsiIndicator.setLinePosition(80, 20, rsi.doubleValue());
+            if (rsi.compareTo(BigDecimal.valueOf(70)) < 0 && rsi.compareTo(BigDecimal.valueOf(30)) > 0){
+                rsiSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.holo_blue_bright));
+                rsiSignalText.setText("hold");
+            } else if (rsi.compareTo(BigDecimal.valueOf(80)) < 0 && rsi.compareTo(BigDecimal.valueOf(70)) >= 0){
+                rsiSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                rsiSignalText.setText("sell");
+            } else if (rsi.compareTo(BigDecimal.valueOf(80)) >= 0){
+                rsiSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                rsiSignalText.setText("strong sell");
+            } else if (rsi.compareTo(BigDecimal.valueOf(30)) <= 0 && rsi.compareTo(BigDecimal.valueOf(20)) > 0){
+                rsiSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                rsiSignalText.setText("buy");
+            } else if (rsi.compareTo(BigDecimal.valueOf(20)) <= 0){
+                rsiSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                rsiSignalText.setText("strong buy");
+            }
 
+            rsiIndicator.setLinePosition(80, 20, rsi.doubleValue());
 
         } else {
             rsText.setText("N/A");
@@ -241,8 +280,28 @@ public class HomeThirdFragment extends BaseFragment {
         // set sok text
         BigDecimal sokValue = null;
         if (sokList.size() > 0){
-            sokValue = sokList.get(0).multiply(BigDecimal.valueOf(100));
-            sokText.setText(String.valueOf(sokValue.setScale(2, BigDecimal.ROUND_HALF_UP)) + "%");
+            sokValue = sokList.get(0);
+            sokText.setText(String.valueOf(sokValue.multiply(BigDecimal.valueOf(100)).setScale(2, BigDecimal.ROUND_HALF_UP)) + "%");
+
+            if (sokValue.compareTo(BigDecimal.valueOf(0.7)) < 0 && sokValue.compareTo(BigDecimal.valueOf(0.3)) > 0){
+                sokSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.holo_blue_bright));
+                sokSignalText.setText("hold");
+            } else if (sokValue.compareTo(BigDecimal.valueOf(0.8)) < 0 && sokValue.compareTo(BigDecimal.valueOf(0.7)) >= 0){
+                sokSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                sokSignalText.setText("sell");
+            } else if (sokValue.compareTo(BigDecimal.valueOf(0.8)) >= 0){
+                sokSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                sokSignalText.setText("strong sell");
+            } else if (sokValue.compareTo(BigDecimal.valueOf(0.3)) <= 0 && sokValue.compareTo(BigDecimal.valueOf(0.2)) > 0){
+                sokSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                sokSignalText.setText("buy");
+            } else if (sokValue.compareTo(BigDecimal.valueOf(0.2)) <= 0){
+                sokSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                sokSignalText.setText("strong buy");
+            }
+            
+            sokIndicator.setLinePosition(0.8, 0.2, sokValue.doubleValue());
+
         } else {
             sokText.setText("N/A");
         }
@@ -252,11 +311,30 @@ public class HomeThirdFragment extends BaseFragment {
         if (sokList.size() >= 3 ){
             BigDecimal totalSok = BigDecimal.ZERO;
             for (int i=0; i<3; i++){
-                System.out.println("test: " + sokList.get(i));
                 totalSok = totalSok.add(sokList.get(i));
             }
             sodValue = totalSok.divide(BigDecimal.valueOf(3), 6, BigDecimal.ROUND_HALF_UP);
             sodText.setText(String.valueOf(sodValue.multiply(BigDecimal.valueOf(100)).setScale(2, BigDecimal.ROUND_HALF_UP)) + "%");
+
+            if (sodValue.compareTo(BigDecimal.valueOf(0.7)) < 0 && sodValue.compareTo(BigDecimal.valueOf(0.3)) > 0){
+                sodSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.holo_blue_bright));
+                sodSignalText.setText("hold");
+            } else if (sodValue.compareTo(BigDecimal.valueOf(0.8)) < 0 && sodValue.compareTo(BigDecimal.valueOf(0.7)) >= 0){
+                sodSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                sodSignalText.setText("sell");
+            } else if (sodValue.compareTo(BigDecimal.valueOf(0.8)) >= 0){
+                sodSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                sodSignalText.setText("strong sell");
+            } else if (sodValue.compareTo(BigDecimal.valueOf(0.3)) <= 0 && sodValue.compareTo(BigDecimal.valueOf(0.2)) > 0){
+                sodSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                sodSignalText.setText("buy");
+            } else if (sodValue.compareTo(BigDecimal.valueOf(0.2)) <= 0){
+                sodSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                sodSignalText.setText("strong buy");
+            }
+
+            sodIndicator.setLinePosition(0.8, 0.2, sodValue.doubleValue());
+       
         }
 
         // williams
@@ -265,6 +343,26 @@ public class HomeThirdFragment extends BaseFragment {
             williams = currentList.get(0).getClose().subtract(getHighestInPastFourteenDays(0)).
                     divide(getHighestInPastFourteenDays(0).subtract(getLowestInPastFourteenDays(0)), 6, BigDecimal.ROUND_HALF_UP);
             williamsRText.setText(String.valueOf(williams.multiply(BigDecimal.valueOf(100)).setScale(2, BigDecimal.ROUND_HALF_UP)) + "%");
+            
+            if (williams.abs().compareTo(BigDecimal.valueOf(0.7)) < 0 && williams.abs().compareTo(BigDecimal.valueOf(0.3)) > 0){
+                williamsRSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.holo_blue_bright));
+                williamsRSignalText.setText("hold");
+            } else if (williams.abs().compareTo(BigDecimal.valueOf(0.3)) < 0 && williams.abs().compareTo(BigDecimal.valueOf(0.2)) >= 0){
+                williamsRSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                williamsRSignalText.setText("sell");
+            } else if (williams.abs().compareTo(BigDecimal.valueOf(0.2)) <= 0){
+                williamsRSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                williamsRSignalText.setText("strong sell");
+            } else if (williams.abs().compareTo(BigDecimal.valueOf(0.8)) <= 0 && williams.abs().compareTo(BigDecimal.valueOf(0.7)) > 0){
+                williamsRSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                williamsRSignalText.setText("buy");
+            } else if (williams.abs().compareTo(BigDecimal.valueOf(0.8)) >= 0){
+                williamsRSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                williamsRSignalText.setText("strong buy");
+            }
+
+            williamIndicator.setLinePosition(0.2, 0.8, williams.abs().doubleValue());
+        
         } else {
             williamsRText.setText("N/A");
         }
@@ -287,11 +385,6 @@ public class HomeThirdFragment extends BaseFragment {
             }
             mfiList.add(mfi);
         }
-        if (mfiList.size() > 0){
-            mfiText.setText(String.valueOf(mfiList.get(0).setScale(2, BigDecimal.ROUND_HALF_UP)));
-        } else {
-            mfiText.setText("N/A");
-        }
 
         // 14 days mfi
         BigDecimal posTotal = BigDecimal.ZERO;
@@ -308,10 +401,29 @@ public class HomeThirdFragment extends BaseFragment {
             fourteenDaysMfi = BigDecimal.valueOf(100).subtract(
                     BigDecimal.valueOf(100).divide( BigDecimal.ONE.add(posTotal.divide(
                             negTotal, 6, BigDecimal.ROUND_HALF_UP)), 6, BigDecimal.ROUND_HALF_UP ) );
-            fourteenDaysMifText.setText(String.valueOf(fourteenDaysMfi.setScale(2, BigDecimal.ROUND_HALF_UP)));
+            mfiText.setText(String.valueOf(fourteenDaysMfi.setScale(2, BigDecimal.ROUND_HALF_UP)));
+
+            if (fourteenDaysMfi.compareTo(BigDecimal.valueOf(80)) < 0 && fourteenDaysMfi.compareTo(BigDecimal.valueOf(20)) > 0){
+                mfiSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.holo_blue_bright));
+                mfiSignalText.setText("hold");
+            } else if (fourteenDaysMfi.compareTo(BigDecimal.valueOf(90)) < 0 && fourteenDaysMfi.compareTo(BigDecimal.valueOf(80)) >= 0){
+                mfiSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                mfiSignalText.setText("sell");
+            } else if (fourteenDaysMfi.compareTo(BigDecimal.valueOf(90)) >= 0){
+                mfiSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.red));
+                mfiSignalText.setText("strong sell");
+            } else if (fourteenDaysMfi.compareTo(BigDecimal.valueOf(20)) <= 0 && fourteenDaysMfi.compareTo(BigDecimal.valueOf(10)) > 0){
+                mfiSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                mfiSignalText.setText("buy");
+            } else if (fourteenDaysMfi.compareTo(BigDecimal.valueOf(10)) <= 0){
+                mfiSignalText.setTextColor(ContextCompat.getColor(getActivity(), R.color.green));
+                mfiSignalText.setText("strong buy");
+            }
+
+            mfiIndicator.setLinePosition(90, 10, fourteenDaysMfi.doubleValue());
         }
         else {
-            fourteenDaysMifText.setText("N/A");
+            mfiText.setText("N/A");
         }
 
         // buy/sell signal
