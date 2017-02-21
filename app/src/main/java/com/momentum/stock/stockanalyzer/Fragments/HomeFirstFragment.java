@@ -27,6 +27,8 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.momentum.stock.stockanalyzer.Activities.HomeActivity;
 import com.momentum.stock.stockanalyzer.CustomViews.MyMarkerView;
 import com.momentum.stock.stockanalyzer.R;
@@ -98,6 +100,10 @@ public class HomeFirstFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        AdView mAdView = (AdView) fragmentView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         stockSymbol = ((HomeActivity) getActivity()).getSelectedStockSymbol();
         stockName = ((HomeActivity) getActivity()).getSelectedStockName();
