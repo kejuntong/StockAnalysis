@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -60,5 +61,57 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/title_bar"/>
+
+
+    <RelativeLayout
+        android:id="@+id/empty_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/title_bar"
+        android:clickable="true"
+        android:visibility="gone">
+
+        <View
+            android:id="@+id/centre_line"
+            android:layout_width="100dp"
+            android:layout_height="1dp"
+            android:layout_centerInParent="true"/>
+
+        <TextView
+            android:id="@+id/search_label_text"
+            android:layout_width="210dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="You can search and add stocks in your portfolio"
+            android:textColor="@color/white"
+            android:textSize="17dp"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@+id/centre_line"
+            android:layout_marginBottom="18dp"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/search_button"
+            android:layout_width="210dp"
+            android:layout_height="44dp"
+            android:layout_below="@id/centre_line"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/selectable_button_trans_white"
+            android:text="Search Stocks"
+            android:textColor="@color/holo_blue_bright"
+            android:textSize="17dp"
+            android:fontFamily="sans-serif-medium" />
+
+    </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

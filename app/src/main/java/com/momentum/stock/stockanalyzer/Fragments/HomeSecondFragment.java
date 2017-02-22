@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.momentum.stock.stockanalyzer.Activities.HomeActivity;
 import com.momentum.stock.stockanalyzer.Adapters.StockHistoryAdapter;
 import com.momentum.stock.stockanalyzer.R;
@@ -66,17 +68,17 @@ public class HomeSecondFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        fragmentView.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
+
         stockSymbol = ((HomeActivity) getActivity()).getSelectedStockSymbol();
         stockName = ((HomeActivity) getActivity()).getSelectedStockName();
         titleText = (TextView) fragmentView.findViewById(R.id.title_text);
         titleText.setText(stockSymbol + ", " + stockName);
-
-        fragmentView.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         setFavoriteButton();
 
@@ -89,6 +91,7 @@ public class HomeSecondFragment extends BaseFragment {
         mAdapter.notifyDataSetChanged();
 //        pullData(stockSymbol);
 
+        setAdvertisement();
     }
 
     private void initViews(){
@@ -183,6 +186,12 @@ public class HomeSecondFragment extends BaseFragment {
 
             }
         });
+    }
+
+    private void setAdvertisement(){
+        AdView mAdView = (AdView) fragmentView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
 }

@@ -101,21 +101,17 @@ public class HomeFirstFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        AdView mAdView = (AdView) fragmentView.findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        fragmentView.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getActivity().finish();
+            }
+        });
 
         stockSymbol = ((HomeActivity) getActivity()).getSelectedStockSymbol();
         stockName = ((HomeActivity) getActivity()).getSelectedStockName();
         titleText = (TextView) fragmentView.findViewById(R.id.title_text);
         titleText.setText(stockSymbol + ", " + stockName);
-
-        fragmentView.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         setFavoriteButton();
 
@@ -124,6 +120,8 @@ public class HomeFirstFragment extends BaseFragment {
         pullData(stockSymbol);
 
         setRefreshButton();
+
+        setAdvertisement();
     }
 
     private void initViews(){
@@ -374,6 +372,12 @@ public class HomeFirstFragment extends BaseFragment {
                 }.start();
             }
         });
+    }
+
+    private void setAdvertisement(){
+        AdView mAdView = (AdView) fragmentView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
 }

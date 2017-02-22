@@ -11,9 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.momentum.stock.stockanalyzer.Adapters.MyPortfolioAdapter;
 import com.momentum.stock.stockanalyzer.Models.Company;
 import com.momentum.stock.stockanalyzer.R;
@@ -34,15 +37,22 @@ public class MyPortfolioActivity extends Activity {
     ImageButton backButton;
     Button addButton;
     ImageButton refreshButton;
+    RelativeLayout emptyScreen;
 
     RecyclerView mRecyclerView;
     MyPortfolioAdapter mAdapter;
     ArrayList<Company> wishArrayList;
 
+    boolean isOnCreate;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_portfolio);
+
+        isOnCreate = true;
+
+        setEmptyScreen();
 
         backButton = (ImageButton) findViewById(R.id.back_button);
         boolean shouldHide;
@@ -79,6 +89,29 @@ public class MyPortfolioActivity extends Activity {
                 mAdapter.notifyDataSetChanged();
             }
         });
+
+        setAdvertisement();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (isOnCreate){
+            isOnCreate = false;
+        } else {
+            loadListAndPullData();
+        }
+    }
+
+    private void setEmptyScreen(){
+        emptyScreen = (RelativeLayout) findViewById(R.id.empty_screen);
+        Button searchButton = (Button) findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MyPortfolioActivity.this, StockSelectActivity.class));
+            }
+        });
     }
 
     private void setRecyclerView(){
@@ -92,19 +125,7 @@ public class MyPortfolioActivity extends Activity {
 
         sharedPref = getSharedPreferences(Constants.wishListSharePreference, Context.MODE_PRIVATE);
         editor = sharedPref.edit();
-        wishListString = sharedPref.getString(Constants.wishListKey, "");
-        if (!wishListString.isEmpty()) {
-            String[] array = wishListString.split(";");
-            for (int i=0; i<array.length; i++){
-                if (!array[i].isEmpty()){
-                    String symbol = array[i].split(",")[0];
-                    String name = array[i].split(",")[1];
-                    wishArrayList.add(new Company(symbol, name));
-                }
-            }
-            mAdapter.notifyDataSetChanged();
-        }
-
+        loadListAndPullData();
 
         mAdapter.setOnItemLongClickListener(new OnItemClickedCallbackInterface() {
             @Override
@@ -129,6 +150,13 @@ public class MyPortfolioActivity extends Activity {
                                 wishListString = wishListString.replace(stringToRemove, "");
                                 editor.putString(Constants.wishListKey, wishListString);
                                 editor.apply();
+
+                                if (wishArrayList.size() == 0){
+                                    emptyScreen.setVisibility(View.VISIBLE);
+                                } else {
+                                    emptyScreen.setVisibility(View.GONE);
+                                }
+
                             }
                         }).negativeText("Cancel")
                         .negativeColorRes(R.color.blue);
@@ -137,5 +165,29 @@ public class MyPortfolioActivity extends Activity {
 
             }
         });
+    }
+
+    private void loadListAndPullData(){
+        sharedPref = getSharedPreferences(Constants.wishListSharePreference, Context.MODE_PRIVATE);
+        wishListString = sharedPref.getString(Constants.wishListKey, "");
+        if (!wishListString.isEmpty()) {
+            String[] array = wishListString.split(";");
+            emptyScreen.setVisibility(View.GONE);
+            wishArrayList.clear();
+            for (int i=0; i<array.length; i++){
+                if (!array[i].isEmpty()){
+                    String symbol = array[i].split(",")[0];
+                    String name = array[i].split(",")[1];
+                    wishArrayList.add(new Company(symbol, name));
+                }
+            }
+            mAdapter.notifyDataSetChanged();
+        }
+    }
+
+    private void setAdvertisement(){
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 }

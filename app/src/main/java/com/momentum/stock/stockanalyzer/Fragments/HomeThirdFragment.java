@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.momentum.stock.stockanalyzer.Activities.HomeActivity;
 import com.momentum.stock.stockanalyzer.CustomViews.CustomColorBarIndicator;
 import com.momentum.stock.stockanalyzer.R;
@@ -40,11 +42,11 @@ public class HomeThirdFragment extends BaseFragment {
 
     View fragmentView;
 
-    TextView openPriceText;
-    TextView highPriceText;
-    TextView lowPriceText;
-    TextView closePriceText;
-    TextView volumeText;
+//    TextView openPriceText;
+//    TextView highPriceText;
+//    TextView lowPriceText;
+//    TextView closePriceText;
+//    TextView volumeText;
     TextView priceGainText;
     TextView priceLossText;
     TextView avgGainText;
@@ -96,7 +98,7 @@ public class HomeThirdFragment extends BaseFragment {
         fragmentView.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                
+                getActivity().finish();
             }
         });
 
@@ -117,11 +119,11 @@ public class HomeThirdFragment extends BaseFragment {
         String strDate = dateFormat.format(date);
         sectionOneTitle.setText("Market Info - " + strDate);
 
-        openPriceText = (TextView) fragmentView.findViewById(R.id.open_price);
-        highPriceText = (TextView) fragmentView.findViewById(R.id.high_price);
-        lowPriceText = (TextView) fragmentView.findViewById(R.id.low_price);
-        closePriceText = (TextView) fragmentView.findViewById(R.id.close_price);
-        volumeText = (TextView) fragmentView.findViewById(R.id.volume);
+//        openPriceText = (TextView) fragmentView.findViewById(R.id.open_price);
+//        highPriceText = (TextView) fragmentView.findViewById(R.id.high_price);
+//        lowPriceText = (TextView) fragmentView.findViewById(R.id.low_price);
+//        closePriceText = (TextView) fragmentView.findViewById(R.id.close_price);
+//        volumeText = (TextView) fragmentView.findViewById(R.id.volume);
         priceGainText = (TextView) fragmentView.findViewById(R.id.price_gain);
         priceLossText = (TextView) fragmentView.findViewById(R.id.price_loss);
         avgGainText = (TextView) fragmentView.findViewById(R.id.avg_gain);
@@ -150,12 +152,12 @@ public class HomeThirdFragment extends BaseFragment {
 
         signalText = (TextView) fragmentView.findViewById(R.id.signal);
 
-        // open, high, low, close prices, and volume
-        openPriceText.setText(String.valueOf(currentList.get(0).getOpen().setScale(2, BigDecimal.ROUND_HALF_UP)));
-        highPriceText.setText(String.valueOf(currentList.get(0).getHigh().setScale(2, BigDecimal.ROUND_HALF_UP)));
-        lowPriceText.setText(String.valueOf(currentList.get(0).getLow().setScale(2, BigDecimal.ROUND_HALF_UP)));
-        closePriceText.setText(String.valueOf(currentList.get(0).getClose().setScale(2, BigDecimal.ROUND_HALF_UP)));
-        volumeText.setText(NumberFormat.getNumberInstance(Locale.US).format(currentList.get(0).getVolume()));
+//        // open, high, low, close prices, and volume
+//        openPriceText.setText(String.valueOf(currentList.get(0).getOpen().setScale(2, BigDecimal.ROUND_HALF_UP)));
+//        highPriceText.setText(String.valueOf(currentList.get(0).getHigh().setScale(2, BigDecimal.ROUND_HALF_UP)));
+//        lowPriceText.setText(String.valueOf(currentList.get(0).getLow().setScale(2, BigDecimal.ROUND_HALF_UP)));
+//        closePriceText.setText(String.valueOf(currentList.get(0).getClose().setScale(2, BigDecimal.ROUND_HALF_UP)));
+//        volumeText.setText(NumberFormat.getNumberInstance(Locale.US).format(currentList.get(0).getVolume()));
 
         // calculate gain and loss
         gainList = new ArrayList<>();
@@ -463,6 +465,8 @@ public class HomeThirdFragment extends BaseFragment {
         else {
             signalText.setText("N/A");
         }
+
+        setAdvertisement();
     }
 
     private BigDecimal getLowestInPastFourteenDays(int from){
@@ -529,5 +533,11 @@ public class HomeThirdFragment extends BaseFragment {
 
             }
         });
+    }
+
+    private void setAdvertisement(){
+        AdView mAdView = (AdView) fragmentView.findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 }

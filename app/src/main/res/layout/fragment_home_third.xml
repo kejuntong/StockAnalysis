@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black">
@@ -62,7 +63,7 @@
                 android:id="@+id/first_section_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Market Info"
+                android:text="Gain and loss"
                 android:textColor="@color/white"
                 android:textStyle="bold|italic"
                 android:textSize="17dp"/>
@@ -73,141 +74,126 @@
                 android:background="@color/blue"
                 android:layout_marginTop="3dp"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_marginTop="8dp">-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:textSize="15dp"
-                    android:text="Open Price: "
-                    android:textColor="@color/white"/>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="sans-serif-medium"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:text="Open Price: "-->
+                    <!--android:textColor="@color/white"/>-->
 
-                <TextView
-                    android:id="@+id/open_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="10.00000"
-                    android:textColor="@color/holo_blue_bright"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/open_price"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:text="10.00000"-->
+                    <!--android:textColor="@color/holo_blue_bright"/>-->
 
-            </LinearLayout>
+            <!--</LinearLayout>-->
+            <!---->
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:orientation="horizontal">-->
 
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="sans-serif-medium"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:text="High Price: "-->
+                    <!--android:textColor="@color/white"/>-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
+                <!--<TextView-->
+                    <!--android:id="@+id/high_price"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:text="10.00000"-->
+                    <!--android:textColor="@color/holo_blue_bright"/>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:textSize="15dp"
-                    android:text="High Price: "
-                    android:textColor="@color/white"/>
+            <!--</LinearLayout>-->
 
-                <TextView
-                    android:id="@+id/high_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="10.00000"
-                    android:textColor="@color/holo_blue_bright"/>
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_marginTop="8dp">-->
 
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="sans-serif-medium"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:text="Low Price: "-->
+                    <!--android:textColor="@color/white"/>-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                <!--<TextView-->
+                    <!--android:id="@+id/low_price"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:text="10.00000"-->
+                    <!--android:textColor="@color/holo_blue_bright"/>-->
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:textSize="15dp"
-                    android:text="Low Price: "
-                    android:textColor="@color/white"/>
+            <!--</LinearLayout>-->
 
-                <TextView
-                    android:id="@+id/low_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="10.00000"
-                    android:textColor="@color/holo_blue_bright"/>
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_marginTop="8dp">-->
 
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="sans-serif-medium"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:text="Close Price: "-->
+                    <!--android:textColor="@color/white"/>-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                <!--<TextView-->
+                    <!--android:id="@+id/close_price"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:text="10.00000"-->
+                    <!--android:textColor="@color/holo_blue_bright"/>-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:textSize="15dp"
-                    android:text="Close Price: "
-                    android:textColor="@color/white"/>
+            <!--</LinearLayout>-->
 
-                <TextView
-                    android:id="@+id/close_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="10.00000"
-                    android:textColor="@color/holo_blue_bright"/>
+            <!--<LinearLayout-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:orientation="horizontal"-->
+                <!--android:layout_marginTop="8dp">-->
 
-            </LinearLayout>
+                <!--<TextView-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:fontFamily="sans-serif-medium"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:text="Volume: "-->
+                    <!--android:textColor="@color/white"/>-->
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="8dp">
+                <!--<TextView-->
+                    <!--android:id="@+id/volume"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:textSize="15dp"-->
+                    <!--android:text="10.00000"-->
+                    <!--android:textColor="@color/holo_blue_bright"/>-->
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-medium"
-                    android:textSize="15dp"
-                    android:text="Volume: "
-                    android:textColor="@color/white"/>
+            <!--</LinearLayout>-->
 
-                <TextView
-                    android:id="@+id/volume"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textSize="15dp"
-                    android:text="10.00000"
-                    android:textColor="@color/holo_blue_bright"/>
-
-            </LinearLayout>
-
-            <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginTop="8dp"-->
-            <!--android:fontFamily="sans-serif-medium"-->
-            <!--android:textSize="15dp"-->
-            <!--android:text="Change (close price c - close price p): "/>-->
-
-            <!--<TextView-->
-            <!--android:id="@+id/price_change"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:textSize="15dp"-->
-            <!--android:text="10.00000"/>-->
 
             <LinearLayout
                 android:id="@+id/gain_line"
@@ -346,6 +332,15 @@
                 android:layout_height="1dp"
                 android:background="@color/blue"
                 android:layout_marginTop="3dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="13dp"
+                android:text="If trading market is not closed today, the below signals are calculated based on the previous trading day."
+                android:textColor="@color/white"/>
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -614,5 +609,15 @@
             android:visibility="gone"/>
 
     </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

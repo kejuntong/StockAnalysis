@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.momentum.stock.stockanalyzer.Activities.HomeActivity;
 import com.momentum.stock.stockanalyzer.Models.Company;
 import com.momentum.stock.stockanalyzer.R;
@@ -49,7 +51,7 @@ public class StockSelectAdapter extends
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = mInflater.inflate(R.layout.item_my_portfolio, parent, false);
+        View view = mInflater.inflate(R.layout.item_select_stock, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
 
         viewHolder.symbolAndNameText = (TextView) view.findViewById(R.id.symbol_and_name);
@@ -98,6 +100,7 @@ public class StockSelectAdapter extends
     public void setOnItemLongClickListener(OnItemClickedCallbackInterface cbi){
         this.onItemLongClickListener = cbi;
     }
+
 }
 
 

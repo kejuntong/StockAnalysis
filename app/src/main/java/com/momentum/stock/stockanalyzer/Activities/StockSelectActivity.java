@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
 import com.opencsv.CSVReader;
 import com.momentum.stock.stockanalyzer.Adapters.StockSelectAdapter;
@@ -55,6 +57,7 @@ public class StockSelectActivity extends Activity {
 
         setSearchText();
 
+        setAdvertisement();
     }
 
     private void initViews(){
@@ -220,6 +223,12 @@ public class StockSelectActivity extends Activity {
             mAdapter.notifyDataSetChanged();
         }
 
+    }
+
+    private void setAdvertisement(){
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
 }
