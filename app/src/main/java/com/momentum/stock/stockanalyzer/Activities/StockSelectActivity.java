@@ -1,13 +1,11 @@
 package com.momentum.stock.stockanalyzer.Activities;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -16,7 +14,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.momentum.stock.stockanalyzer.UtilClasses.Constants;
 import com.opencsv.CSVReader;
@@ -65,7 +62,7 @@ public class StockSelectActivity extends Activity {
         wishListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(StockSelectActivity.this, WishListActivity.class));
+                startActivity(new Intent(StockSelectActivity.this, MyPortfolioActivity.class));
             }
         });
         searchText = (EditText) findViewById(R.id.search_text);

@@ -31,6 +31,28 @@
             android:textStyle="bold"
             android:textSize="16dp"/>
 
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/selectable_button_background"
+            android:layout_alignParentRight="true"
+            android:text="+"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/white"
+            android:textSize="35dp" />
+
+        <ImageButton
+            android:id="@+id/button_refresh"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:padding="13dp"
+            android:scaleType="centerInside"
+            android:layout_toLeftOf="@+id/add_button"
+            android:src="@drawable/button_refresh"
+            android:background="@drawable/selectable_button_background"
+            android:tint="@color/white"/>
+
     </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView

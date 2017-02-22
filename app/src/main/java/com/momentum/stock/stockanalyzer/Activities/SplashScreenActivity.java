@@ -40,7 +40,9 @@ public class SplashScreenActivity extends AwesomeSplash {
 
     @Override
     public void animationsFinished() {
-        startActivity(new Intent(SplashScreenActivity.this, StockSelectActivity.class));
+        Intent intent = new Intent(SplashScreenActivity.this, MyPortfolioActivity.class);
+        intent.putExtra("hide_back_button", true);
+        startActivity(intent);
         finish();
     }
 }
