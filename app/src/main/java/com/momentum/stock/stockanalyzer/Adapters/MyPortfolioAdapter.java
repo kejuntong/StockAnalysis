@@ -107,15 +107,15 @@ public class MyPortfolioAdapter extends
                             if (stockQuote.getChange().compareTo(BigDecimal.ZERO) < 0) {
                                 holder.priceText.setTextColor(ContextCompat.getColor(mContext, R.color.red));
                                 holder.priceText.setText(stockQuote.getPrice() +
-                                        "(-" + stockQuote.getChangeInPercent() + "%)");
+                                        " (" + stockQuote.getChangeInPercent() + "%)");
                             } else if (stockQuote.getChange().compareTo(BigDecimal.ZERO) > 0){
                                 holder.priceText.setTextColor(ContextCompat.getColor(mContext, R.color.green));
                                 holder.priceText.setText(stockQuote.getPrice() +
-                                        "(+" + stockQuote.getChangeInPercent() + "%)");
+                                        " (+" + stockQuote.getChangeInPercent() + "%)");
                             } else {
                                 holder.priceText.setTextColor(ContextCompat.getColor(mContext, R.color.white));
                                 holder.priceText.setText(stockQuote.getPrice() +
-                                        "(+" + stockQuote.getChangeInPercent() + "%)");
+                                        " (+" + stockQuote.getChangeInPercent() + "%)");
                             }
 //                            holder.priceText.setText(String.valueOf(stockQuote.getPrice()));
                         }

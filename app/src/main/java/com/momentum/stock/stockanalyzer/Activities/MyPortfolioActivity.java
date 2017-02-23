@@ -34,7 +34,6 @@ public class MyPortfolioActivity extends Activity {
     SharedPreferences.Editor editor;
     String wishListString;
 
-    ImageButton backButton;
     Button addButton;
     ImageButton refreshButton;
     RelativeLayout emptyScreen;
@@ -54,29 +53,13 @@ public class MyPortfolioActivity extends Activity {
 
         setEmptyScreen();
 
-        backButton = (ImageButton) findViewById(R.id.back_button);
-        boolean shouldHide;
-        if (getIntent().getExtras() != null){
-            shouldHide = getIntent().getExtras().getBoolean("hide_back_button", false);
-        } else {
-            shouldHide = false;
-        }
-        if (shouldHide){
-            backButton.setVisibility(View.GONE);
-        } else {
-            backButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    finish();
-                }
-            });
-        }
-
         addButton = (Button) findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MyPortfolioActivity.this, StockSelectActivity.class));
+                Intent intent = new Intent(MyPortfolioActivity.this, StockSelectActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+                startActivity(intent);
             }
         });
 

@@ -65,7 +65,11 @@ public class StockSelectActivity extends Activity {
         wishListButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(StockSelectActivity.this, MyPortfolioActivity.class));
+//                Intent intent = new Intent(StockSelectActivity.this, MyPortfolioActivity.class);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+//                intent.putExtra("hide_back_button", false);
+//                startActivity(intent);
+                finish();
             }
         });
         searchText = (EditText) findViewById(R.id.search_text);
