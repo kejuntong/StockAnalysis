@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -43,6 +44,7 @@ public class MyPortfolioActivity extends Activity {
     ArrayList<Company> wishArrayList;
 
     boolean isOnCreate;
+    boolean canExit = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +86,23 @@ public class MyPortfolioActivity extends Activity {
         } else {
             loadListAndPullData();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!canExit){
+            canExit = true;
+            Toast.makeText(MyPortfolioActivity.this, "Press back button again to exit", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        canExit = false;
     }
 
     private void setEmptyScreen(){
