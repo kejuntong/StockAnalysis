@@ -182,6 +182,8 @@ public class MyPortfolioActivity extends Activity {
                 }
             }
             mAdapter.notifyDataSetChanged();
+        } else {
+            emptyScreen.setVisibility(View.VISIBLE);
         }
     }
 

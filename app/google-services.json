@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "987082952633",
+    "firebase_url": "https://stockmomentum-ab216.firebaseio.com",
+    "project_id": "stockmomentum-ab216",
+    "storage_bucket": "stockmomentum-ab216.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:987082952633:android:7a268a65fb5f2d3e",
+        "android_client_info": {
+          "package_name": "com.momentum.stock.stockanalyzer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "987082952633-bd10o81otar4dupfj44cm8rt7s8lebo1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.momentum.stock.stockanalyzer",
+            "certificate_hash": "04affa99037acf853178637d364d2778c8a43ee7"
+          }
+        },
+        {
+          "client_id": "987082952633-ham46h0vdk3lgenlea8vqqpj9kgbnep5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVm65wEok10C4lxq4y29lG2Me7aIOncCY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "987082952633-ham46h0vdk3lgenlea8vqqpj9kgbnep5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
