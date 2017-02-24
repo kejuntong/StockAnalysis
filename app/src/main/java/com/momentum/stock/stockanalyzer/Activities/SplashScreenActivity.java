@@ -3,6 +3,7 @@ package com.momentum.stock.stockanalyzer.Activities;
 import android.content.Intent;
 
 import com.daimajia.androidanimations.library.Techniques;
+import com.google.android.gms.ads.MobileAds;
 import com.momentum.stock.stockanalyzer.R;
 import com.viksaa.sssplash.lib.activity.AwesomeSplash;
 import com.viksaa.sssplash.lib.cnst.Flags;
@@ -15,6 +16,9 @@ public class SplashScreenActivity extends AwesomeSplash {
 
     @Override
     public void initSplash(ConfigSplash configSplash) {
+
+        MobileAds.initialize(getApplicationContext(), "ca-app-pub-3809096372269559~8812375822");
+
         //Customize Circular Reveal
         configSplash.setBackgroundColor(R.color.black); //any color you want form colors.xml
         configSplash.setAnimCircularRevealDuration(1000); //int ms

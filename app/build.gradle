@@ -8,7 +8,7 @@ android {
         applicationId "com.momentum.stock.stockanalyzer"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 8
+        versionCode 9
         versionName "1.01"
     }
     buildTypes {
@@ -25,7 +25,6 @@ repositories {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-
 
     compile 'com.android.support:appcompat-v7:25.0.1'
     compile 'com.android.support:recyclerview-v7:25.0.1'
