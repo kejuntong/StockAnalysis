@@ -2,6 +2,10 @@
     <string name="app_name">Stock
         Momentum</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3809096372269559/1289109026</string>
+
+    <string name="disclaimer">The data in this app is retrieved from Yahoo Finance, and the Buy/Sell signals shown in the app are obtained based on calculated momentum indicators. Any reliance you place on such information is therefore strictly at your own risk.
+        In no event will we be liable for any loss or damage including without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever arising from loss of data or profits arising out of, or in connection with, the use of this app.
+    </string>
 
 </resources>

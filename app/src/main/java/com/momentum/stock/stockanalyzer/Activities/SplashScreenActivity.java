@@ -1,7 +1,11 @@
 package com.momentum.stock.stockanalyzer.Activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.daimajia.androidanimations.library.Techniques;
 import com.google.android.gms.ads.MobileAds;
 import com.momentum.stock.stockanalyzer.R;
@@ -44,8 +48,37 @@ public class SplashScreenActivity extends AwesomeSplash {
 
     @Override
     public void animationsFinished() {
-        Intent intent = new Intent(SplashScreenActivity.this, MyPortfolioActivity.class);
-        startActivity(intent);
-        finish();
+
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(SplashScreenActivity.this)
+                .content(getString(R.string.disclaimer))
+                .contentColorRes(R.color.black)
+                .backgroundColorRes(R.color.white)
+                .positiveText("AGREE")
+                .positiveColorRes(R.color.blue)
+                .onPositive(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        Intent intent = new Intent(SplashScreenActivity.this, MyPortfolioActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                }).negativeText("DISAGREE")
+                .negativeColorRes(R.color.red)
+                .onNegative(new MaterialDialog.SingleButtonCallback() {
+                    @Override
+                    public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                        finish();
+                    }
+                });
+
+        MaterialDialog dialog = builder.build();
+        dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                finish();
+            }
+        });
+        dialog.show();
+
     }
 }
