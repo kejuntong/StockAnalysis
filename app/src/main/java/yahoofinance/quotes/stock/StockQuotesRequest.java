@@ -1,10 +1,8 @@
 package yahoofinance.quotes.stock;
 
+import yahoofinance.quotes.*;
 import java.util.ArrayList;
 import java.util.List;
-
-import yahoofinance.quotes.QuotesProperty;
-import yahoofinance.quotes.QuotesRequest;
 
 /**
  *

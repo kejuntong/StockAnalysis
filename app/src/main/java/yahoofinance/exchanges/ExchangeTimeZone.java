@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.logging.Level;
-
 import yahoofinance.YahooFinance;
 
 /**
