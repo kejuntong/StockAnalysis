@@ -64,7 +64,7 @@ public abstract class QuotesRequest<T> {
      * Sends the request to Yahoo Finance and parses the result
      *
      * @return List of parsed objects resulting from the Yahoo Finance request
-     * @throws IOException when there's a connection problem or the request is incorrect
+     * @throws java.io.IOException when there's a connection problem or the request is incorrect
      */
     public List<T> getResult() throws IOException {
         List<T> result = new ArrayList<T>();

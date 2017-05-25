@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import yahoofinance.histquotes.HistQuotesRequest;
 import yahoofinance.histquotes.HistoricalQuote;
 import yahoofinance.histquotes.Interval;
+import yahoofinance.histquotes2.HistQuotes2Request;
 import yahoofinance.quotes.stock.StockDividend;
 import yahoofinance.quotes.stock.StockQuote;
 import yahoofinance.quotes.stock.StockQuotesData;
@@ -83,7 +84,7 @@ public class Stock {
      * 
      * @param refresh   indicates whether the data should be requested again to Yahoo Finance
      * @return          basic quotes data available for this stock
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public StockQuote getQuote(boolean refresh) throws IOException {
         if(refresh) {
@@ -122,7 +123,7 @@ public class Stock {
      * 
      * @param refresh   indicates whether the data should be requested again to Yahoo Finance
      * @return          statistics available for this stock
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public StockStats getStats(boolean refresh) throws IOException {
         if(refresh) {
@@ -162,7 +163,7 @@ public class Stock {
      * 
      * @param refresh   indicates whether the data should be requested again to Yahoo Finance
      * @return          dividend data available for this stock
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public StockDividend getDividend(boolean refresh) throws IOException {
         if(refresh) {
@@ -194,12 +195,12 @@ public class Stock {
      * being sent to Yahoo Finance.
      * 
      * @return      a list of historical quotes from this stock
-     * @throws IOException when there's a connection problem
-     * @see         #getHistory(Interval)
-     * @see         #getHistory(Calendar)
-     * @see         #getHistory(Calendar, Calendar)
-     * @see         #getHistory(Calendar, Interval)
-     * @see         #getHistory(Calendar, Calendar, Interval)
+     * @throws java.io.IOException when there's a connection problem
+     * @see         #getHistory(yahoofinance.histquotes.Interval) 
+     * @see         #getHistory(java.util.Calendar) 
+     * @see         #getHistory(java.util.Calendar, java.util.Calendar) 
+     * @see         #getHistory(java.util.Calendar, yahoofinance.histquotes.Interval) 
+     * @see         #getHistory(java.util.Calendar, java.util.Calendar, yahoofinance.histquotes.Interval) 
      */
     public List<HistoricalQuote> getHistory() throws IOException {
         if(this.history != null) {
@@ -218,7 +219,7 @@ public class Stock {
      * 
      * @param interval      the interval of the historical data
      * @return              a list of historical quotes from this stock
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      * @see                 #getHistory() 
      */
     public List<HistoricalQuote> getHistory(Interval interval) throws IOException {
@@ -235,7 +236,7 @@ public class Stock {
      * 
      * @param from          start date of the historical data
      * @return              a list of historical quotes from this stock
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      * @see                 #getHistory() 
      */
     public List<HistoricalQuote> getHistory(Calendar from) throws IOException {
@@ -253,7 +254,7 @@ public class Stock {
      * @param from          start date of the historical data
      * @param interval      the interval of the historical data
      * @return              a list of historical quotes from this stock
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      * @see                 #getHistory() 
      */
     public List<HistoricalQuote> getHistory(Calendar from, Interval interval) throws IOException {
@@ -271,7 +272,7 @@ public class Stock {
      * @param from          start date of the historical data
      * @param to            end date of the historical data
      * @return              a list of historical quotes from this stock
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      * @see                 #getHistory() 
      */
     public List<HistoricalQuote> getHistory(Calendar from, Calendar to) throws IOException {
@@ -290,12 +291,17 @@ public class Stock {
      * @param to            end date of the historical data
      * @param interval      the interval of the historical data
      * @return              a list of historical quotes from this stock
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      * @see                 #getHistory() 
      */
     public List<HistoricalQuote> getHistory(Calendar from, Calendar to, Interval interval) throws IOException {
-        HistQuotesRequest hist = new HistQuotesRequest(this.symbol, from, to, interval);
-        this.setHistory(hist.getResult());
+        if(YahooFinance.HISTQUOTES2_ENABLED.equalsIgnoreCase("true")) {
+            HistQuotes2Request hist = new HistQuotes2Request(this.symbol, from, to, interval);
+            this.setHistory(hist.getResult());
+        } else {
+            HistQuotesRequest hist = new HistQuotesRequest(this.symbol, from, to, interval);
+            this.setHistory(hist.getResult());
+        }
         return this.history;
     }
     

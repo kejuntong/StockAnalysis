@@ -46,6 +46,12 @@ public class YahooFinance {
     
     public static final String QUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.quotes", "http://download.finance.yahoo.com/d/quotes.csv");
     public static final String HISTQUOTES_BASE_URL = System.getProperty("yahoofinance.baseurl.histquotes", "https://ichart.yahoo.com/table.csv");
+    public static final String HISTQUOTES2_ENABLED = System.getProperty("yahoofinance.histquotes2.enabled", "true");
+    public static final String HISTQUOTES2_BASE_URL = System.getProperty("yahoofinance.baseurl.histquotes2", "https://query1.finance.yahoo.com/v7/finance/download/");
+    public static final String HISTQUOTES2_SCRAPE_URL = System.getProperty("yahoofinance.scrapeurl.histquotes2", "https://finance.yahoo.com/quote/%5EGSPC/options");
+    public static final String HISTQUOTES2_CRUMB_URL = System.getProperty("yahoofinance.crumburl.histquotes2", "https://query1.finance.yahoo.com/v1/test/getcrumb");
+    public static final String HISTQUOTES2_CRUMB = System.getProperty("yahoofinance.crumb", "");
+    public static final String HISTQUOTES2_COOKIE = System.getProperty("yahoofinance.cookie", "");
     public static final String QUOTES_CSV_DELIMITER = ",";
     public static final String TIMEZONE = "America/New_York";
     
@@ -63,7 +69,7 @@ public class YahooFinance {
     * 
     * @param symbol     the symbol of the stock for which you want to retrieve information
     * @return           a {@link Stock} object containing the requested information
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
     */
     public static Stock get(String symbol) throws IOException {
         return YahooFinance.get(symbol, false);
@@ -79,7 +85,7 @@ public class YahooFinance {
      * @param symbol                the symbol of the stock for which you want to retrieve information
      * @param includeHistorical     indicates if the historical quotes should be included.
      * @return                      a {@link Stock} object containing the requested information
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Stock get(String symbol, boolean includeHistorical) throws IOException {
         Map<String, Stock> result = YahooFinance.getQuotes(symbol, includeHistorical);
@@ -94,7 +100,7 @@ public class YahooFinance {
      * @param symbol        the symbol of the stock for which you want to retrieve information
      * @param interval      the interval of the included historical data
      * @return              a {@link Stock} object containing the requested information
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Stock get(String symbol, Interval interval) throws IOException {
         return YahooFinance.get(symbol, HistQuotesRequest.DEFAULT_FROM, HistQuotesRequest.DEFAULT_TO, interval);
@@ -109,7 +115,7 @@ public class YahooFinance {
      * @param symbol        the symbol of the stock for which you want to retrieve information
      * @param from          start date of the historical data
      * @return              a {@link Stock} object containing the requested information
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Stock get(String symbol, Calendar from) throws IOException {
         return YahooFinance.get(symbol, from, HistQuotesRequest.DEFAULT_TO, HistQuotesRequest.DEFAULT_INTERVAL);
@@ -125,7 +131,7 @@ public class YahooFinance {
      * @param from          start date of the historical data
      * @param interval      the interval of the included historical data
      * @return              a {@link Stock} object containing the requested information
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Stock get(String symbol, Calendar from, Interval interval) throws IOException {
         return YahooFinance.get(symbol, from, HistQuotesRequest.DEFAULT_TO, interval);
@@ -142,7 +148,7 @@ public class YahooFinance {
      * @param from          start date of the historical data
      * @param to            end date of the historical data
      * @return              a {@link Stock} object containing the requested information
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Stock get(String symbol, Calendar from, Calendar to) throws IOException {
         return YahooFinance.get(symbol, from, to, HistQuotesRequest.DEFAULT_INTERVAL);
@@ -160,7 +166,7 @@ public class YahooFinance {
      * @param to            end date of the historical data
      * @param interval      the interval of the included historical data
      * @return              a {@link Stock} object containing the requested information
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Stock get(String symbol, Calendar from, Calendar to, Interval interval) throws IOException {
         Map<String, Stock> result = YahooFinance.getQuotes(symbol, from, to, interval);
@@ -180,7 +186,7 @@ public class YahooFinance {
     * 
     * @param symbols    the symbols of the stocks for which you want to retrieve information
     * @return           a Map that links the symbols to their respective Stock objects
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
     */
     public static Map<String, Stock> get(String[] symbols) throws IOException {
         return YahooFinance.get(symbols, false);
@@ -201,7 +207,7 @@ public class YahooFinance {
      * @param symbols               the symbols of the stocks for which you want to retrieve information
      * @param includeHistorical     indicates if the historical quotes should be included
      * @return                      a Map that links the symbols to their respective Stock objects
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Map<String, Stock> get(String[] symbols, boolean includeHistorical) throws IOException {
         return YahooFinance.getQuotes(Utils.join(symbols, ","), includeHistorical);
@@ -220,7 +226,7 @@ public class YahooFinance {
      * @param symbols               the symbols of the stocks for which you want to retrieve information
      * @param interval              the interval of the included historical data
      * @return                      a Map that links the symbols to their respective Stock objects.
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Map<String, Stock> get(String[] symbols, Interval interval) throws IOException {
         return YahooFinance.getQuotes(Utils.join(symbols, ","), HistQuotesRequest.DEFAULT_FROM, HistQuotesRequest.DEFAULT_TO, interval);
@@ -239,7 +245,7 @@ public class YahooFinance {
      * @param symbols               the symbols of the stocks for which you want to retrieve information
      * @param from                  start date of the historical data
      * @return                      a Map that links the symbols to their respective Stock objects.
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Map<String, Stock> get(String[] symbols, Calendar from) throws IOException {
         return YahooFinance.getQuotes(Utils.join(symbols, ","), from, HistQuotesRequest.DEFAULT_TO, HistQuotesRequest.DEFAULT_INTERVAL);
@@ -259,7 +265,7 @@ public class YahooFinance {
      * @param from                  start date of the historical data
      * @param interval              the interval of the included historical data
      * @return                      a Map that links the symbols to their respective Stock objects.
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Map<String, Stock> get(String[] symbols, Calendar from, Interval interval) throws IOException {
         return YahooFinance.getQuotes(Utils.join(symbols, ","), from, HistQuotesRequest.DEFAULT_TO, interval);
@@ -280,7 +286,7 @@ public class YahooFinance {
      * @param from                  start date of the historical data
      * @param to                    end date of the historical data
      * @return                      a Map that links the symbols to their respective Stock objects.
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Map<String, Stock> get(String[] symbols, Calendar from, Calendar to) throws IOException {
         return YahooFinance.getQuotes(Utils.join(symbols, ","), from, to, HistQuotesRequest.DEFAULT_INTERVAL);
@@ -302,7 +308,7 @@ public class YahooFinance {
      * @param to                    end date of the historical data
      * @param interval              the interval of the included historical data
      * @return                      a Map that links the symbols to their respective Stock objects.
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static Map<String, Stock> get(String[] symbols, Calendar from, Calendar to, Interval interval) throws IOException {
         return YahooFinance.getQuotes(Utils.join(symbols, ","), from, to, interval);
@@ -322,7 +328,7 @@ public class YahooFinance {
      * 
      * @param symbol    symbol for the FX rate you want to request
      * @return          a quote for the requested FX rate
-     * @throws IOException when there's a connection problem
+     * @throws java.io.IOException when there's a connection problem
      */
     public static FxQuote getFx(String symbol) throws IOException {
         FxQuotesRequest request = new FxQuotesRequest(symbol);
@@ -337,8 +343,8 @@ public class YahooFinance {
      * 
      * @param symbols   an array of FX symbols
      * @return          the requested FX symbols mapped to their respective quotes
-     * @throws IOException when there's a connection problem or the request is incorrect
-     * @see             #getFx(String)
+     * @throws java.io.IOException when there's a connection problem or the request is incorrect
+     * @see             #getFx(java.lang.String) 
      */
     public static Map<String, FxQuote> getFx(String[] symbols) throws IOException {
         FxQuotesRequest request = new FxQuotesRequest(Utils.join(symbols, ","));
