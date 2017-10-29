@@ -141,9 +141,15 @@ public class HomeActivity extends Activity {
                     Calendar calendarTo = Calendar.getInstance();
                     List<HistoricalQuote> list = stock.getHistory(calendarFrom, calendarTo, Interval.DAILY);
                     initialDataList.clear();
-                    for (HistoricalQuote item : list){
-                        initialDataList.add(item);
+
+                    int size = list.size();
+                    for (int i=size-1; i>=0; i--){
+                        initialDataList.add(list.get(i));
                     }
+
+//                    for (HistoricalQuote item : list){
+//                        initialDataList.add(item);
+//                    }
 
                     new Handler(HomeActivity.this.getMainLooper()).post(new Runnable() {
                         @Override

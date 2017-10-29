@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.0"
+    buildToolsVersion '26.0.2'
 
     defaultConfig {
         applicationId "com.momentum.stock.stockanalyzer"
         minSdkVersion 16
         targetSdkVersion 25
-        versionCode 9
-        versionName "1.01"
+        versionCode 13
+        versionName "2.04"
     }
     buildTypes {
         release {
