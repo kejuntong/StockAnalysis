@@ -8,8 +8,8 @@ android {
         applicationId "com.momentum.stock.stockanalyzer"
         minSdkVersion 16
         targetSdkVersion 26
-        versionCode 14
-        versionName "2.05"
+        versionCode 15
+        versionName "2.06"
     }
     buildTypes {
         release {
